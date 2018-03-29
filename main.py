@@ -1,5 +1,4 @@
 from flask import Flask, request
-
 from handler.admins import AdminHandler
 from handler.credentials import CredentialsHandler
 from handler.groups import GroupHandler
@@ -7,6 +6,7 @@ from handler.isPartHandler import IsPartHandler
 from handler.messages import MessagesHandler
 from handler.participateInHandler import PinHandler
 from handler.reactions import ReactionHandler
+from handler.replyHandler import ReplyHandler
 from handler.users import UsersHandler
 from handler.receivedMsgs import ReceivedMsgHandler
 
@@ -16,7 +16,6 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return "Welcome to Social Messaging App"
-
 
 @app.route('/login')
 def login():
@@ -102,11 +101,9 @@ def getAllMessageBySenderId(sid):
 def getMessageByDate(date):
     return MessagesHandler().getMessageByDate(date)
 
-
 @app.route('/MessagingAppP1/messages/time=<string:time>')
 def getMessageByTime(time):
     return MessagesHandler().getMessageByTime(time)
-
 
 @app.route('/MessagingAppP1/messages/body=<string:body>')
 def getMessageByBody(body):
@@ -127,26 +124,21 @@ def getAllGroups():
        handler = GroupHandler()
        return handler.getAllGroups()
 
-
 @app.route('/MessagingAppP1/group/gid=<int:gid>')
 def getGroupsById(gid):
    return GroupHandler().getGroupsById(gid)
-
 
 @app.route('/MessagingAppP1/group/gname=<string:gname>')
 def getGroupsByName(gname):
    return GroupHandler().getGroupsByName(gname)
 
-
 @app.route('/MessagingAppP1/group/gdesc=<string:gdesc>')
 def getGroupsByDescription(gdesc):
    return GroupHandler().getGroupByDescription(gdesc)
 
-
 @app.route('/MessagingAppP1/group/gusername=<string:gusername>')
 def getGroupByCreation(gcreation):
    return GroupHandler().getGroupByCreation(gcreation)
-
 
 @app.route('/MessagingAppP1/group/uid=<int:uid>')
 def getByUserId(uid):
@@ -164,7 +156,6 @@ def getAllReactions():
    else:
        handler = ReactionHandler()
        return handler.getAllReactions()
-
 
 @app.route('/MessagingAppP1/reactions/rid=<int:rid>')
 def getAllReactionsById(rid):
@@ -192,16 +183,13 @@ def getAllPinRelation():
     handler = PinHandler()
     return handler.getAllPin()
 
-
 @app.route('/MessagingAppP1/PinRelation/id=<int:pid>')
 def getPinById(pid):
     return PinHandler().getPinById(pid)
 
-
 @app.route('/MessagingAppP1/PinRelation/uid=<int:uid>')
 def getPinByUserId(uid):
     return PinHandler().getPinByUserId(uid)
-
 
 @app.route('/MessagingAppP1/PinRelation/gid=<int:gid>')
 def getPinByGroupId(gid):
@@ -215,16 +203,13 @@ def getPinByGroupId(gid):
 def getAllAdmin():
     return AdminHandler().getAllAdmin()
 
-
 @app.route('/MessagingAppP1/Admin/id=<int:pid>')
 def getAdminById(pid):
     return AdminHandler().getAdminById(pid)
 
-
 @app.route('/MessagingAppP1/Admin/uid=<int:uid>')
 def getAdminByUserId(uid):
     return AdminHandler().getAdminByUserId(uid)
-
 
 @app.route('/MessagingAppP1/Admin/gid=<int:gid>')
 def getAdminByGroupId(gid):
@@ -239,16 +224,13 @@ def getAdminByGroupId(gid):
 def getAllReceivedMessages():
     return ReceivedMsgHandler().getAllReceivedMsg()
 
-
 @app.route('/MessagingAppP1/ReceivedMsg/id=<int:id>')
 def getReceivedById(id):
     return ReceivedMsgHandler().getReceivedMsgById(id)
 
-
 @app.route('/MessagingAppP1/ReceivedMsg/uid=<int:uid>')
 def getReceivedMsgByUserId(uid):
     return ReceivedMsgHandler().getReceivedMsgByUserId(uid)
-
 
 @app.route('/MessagingAppP1/ReceivedMsg/mid=<int:mid>')
 def getReceivedMsgByMessageId(mid):
@@ -263,20 +245,41 @@ def getReceivedMsgByMessageId(mid):
 def getAllIsPart():
     return IsPartHandler().getAllIsPart()
 
-
 @app.route('/MessagingAppP1/PartOfGroup/id=<int:pid>')
 def getIsPartById(pid):
     return IsPartHandler().getIsPartById(pid)
-
 
 @app.route('/MessagingAppP1/PartOfGroup/mid=<int:mid>')
 def getIsPartByMessageId(mid):
     return IsPartHandler().getIsPartByMessageId(mid)
 
-
 @app.route('/MessagingAppP1/PartOfGroup/gid=<int:gid>')
 def getIsPartByGroupId(gid):
     return IsPartHandler().getIsPartByGroupId(gid)
+
+
+
+##################
+#    Is Part     #
+# ################
+
+@app.route('/MessagingAppP1/Reply')
+def getAllReply():
+    return ReplyHandler().getAllReply()
+
+@app.route('/MessagingAppP1/Reply/id=<int:pid>')
+def getReplyById(pid):
+    return ReplyHandler().getReplyById(pid)
+
+@app.route('/MessagingAppP1/Reply/mid=<int:mid>')
+def getReplyByMessageId(mid):
+    return ReplyHandler().getReplyByMessageId(mid)
+
+@app.route('/MessagingAppP1/Reply/rid=<int:rid>')
+def getReplayByGroupId(rid):
+    return ReplyHandler().getReplyByReplyToId(rid)
+
+
 
 
 
