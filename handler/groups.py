@@ -8,7 +8,7 @@ class GroupHandler:
         result = {}
         result['gid'] = row[0]
         result['gname'] = row[1]
-        result['gdescription'] = row[2]
+        result['gdesc'] = row[2]
         result['gcreation'] = row[3]
         result['uid'] = row[4]
 

@@ -18,7 +18,7 @@ class ReactionHandler:
         mapped_result = []
         for r in result:
             mapped_result.append(self.mapToDict(r))
-        return jsonify(User=mapped_result)
+        return jsonify(Reaction=mapped_result)
 
 
     def getAllReactionsById(self, rid):
@@ -30,7 +30,7 @@ class ReactionHandler:
         else:
             for r in result:
                 mapped_result.append(self.mapToDict(r))
-            return jsonify(User=mapped_result)
+            return jsonify(Reaction=mapped_result)
 
     def getByMessageId(self, mid):
         dao = ReactionDAO()
@@ -41,7 +41,7 @@ class ReactionHandler:
         else:
             for r in result:
                 mapped_result.append(self.mapToDict(r))
-            return jsonify(User=mapped_result)
+            return jsonify(Reaction=mapped_result)
 
     def getByUserId(self, uid):
         dao = ReactionDAO()
@@ -52,7 +52,7 @@ class ReactionHandler:
         else:
             for r in result:
                 mapped_result.append(self.mapToDict(r))
-            return jsonify(User=mapped_result)
+            return jsonify(Reaction=mapped_result)
 
     def getByLikesDislikes(self, rating):
         dao = ReactionDAO()
@@ -63,6 +63,6 @@ class ReactionHandler:
         else:
             for r in result:
                 mapped_result.append(self.mapToDict(r))
-            return jsonify(User=mapped_result)
+            return jsonify(Reaction=mapped_result)
 
 

@@ -146,7 +146,7 @@ def getGroupsByName(gname):
 def getGroupsByDescription(gdesc):
    return GroupHandler().getGroupByDescription(gdesc)
 
-@app.route('/MessagingAppP1/group/gusername=<string:gusername>')
+@app.route('/MessagingAppP1/group/gcreation=<string:gcreation>')
 def getGroupByCreation(gcreation):
    return GroupHandler().getGroupByCreation(gcreation)
 
@@ -171,11 +171,11 @@ def getAllReactionsById(rid):
    return ReactionHandler().getAllReactionsById(rid)
 
 @app.route('/MessagingAppP1/reactions/mid=<int:mid>')
-def getByMessageId(mid):
+def getReactionByMessageId(mid):
    return ReactionHandler().getByMessageId(mid)
 
 @app.route('/MessagingAppP1/reactions/uid=<int:uid>')
-def getBySMUserId(uid):
+def getReactionByUserId(uid):
    return ReactionHandler().getByUserId(uid)
 
 @app.route('/MessagingAppP1/reactions/rating=<string:rating>')
@@ -286,6 +286,7 @@ def getReplyByMessageId(mid):
 @app.route('/MessagingAppP1/Reply/rid=<int:rid>')
 def getReplayByGroupId(rid):
     return ReplyHandler().getReplyByReplyToId(rid)
+
 
 ###################
 # TEST FOR MEDIA  #

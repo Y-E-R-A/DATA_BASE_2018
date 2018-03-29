@@ -3,10 +3,10 @@ from dao.credential import CredentialsDAO
 
 class CredentialsHandler:
 
-    #User dictionary
+    #Credentials dictionary
     def mapToUserDict(self, row):
         result = {}
-        result['id'] = row[0]
+        result['cid'] = row[0]
         result['uid'] = row[1]
         result['username'] = row[2]
         result['email'] = row[3]

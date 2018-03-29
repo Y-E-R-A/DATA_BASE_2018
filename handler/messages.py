@@ -9,6 +9,7 @@ class MessagesHandler:
         result['mid'] = row[0]
         result['date'] = row[1]
         result['body'] = row[2]
+        result['sid']= row[3]
         return result
 
 
@@ -55,8 +56,9 @@ class MessagesHandler:
             return jsonify(Messages=mapped_result)
 
     def getMessageByBody(self, body):
-        result = messageDAO.getMessageByBody(body)
+        result = messageDAO().getMessageByBody(body)
         mapped_result = []
+
         if result == None:
             return jsonify(Error="NOT FOUND"), 404
         else:

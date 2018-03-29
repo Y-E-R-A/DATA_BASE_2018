@@ -1,10 +1,10 @@
 class groupDAO:
     def __init__(self):
-        G1 = [100, 'Data Bosses', 'Masters in the art of data', '02/15/2018', 74]
-        G2 = [200, 'Rojo, Negro y Algo Mas', 'Los Leones de Ponce', '01/25/2018', 155]
-        G3 = [300, 'Arquis Picasso', 'Brindando belleza a los circuitos', '02/16/2018', 122]
-        G4 = [400, 'Los Pericos', '', '04/26/2018', 757]
-        G5 = [500, 'Data Bosses', 'Masters of Procrastanition', '02/15/2018', 74]
+        G1 = [100, 'Data Bosses', 'Masters in the art of data', '02-15-2018', 74]
+        G2 = [200, 'Rojo, Negro y Algo Mas', 'Los Leones de Ponce', '01-25-2018', 155]
+        G3 = [300, 'Arquis Picasso', 'Brindando belleza a los circuitos', '02-16-2018', 122]
+        G4 = [400, 'Los Pericos', '', '04-26-2018', 757]
+        G5 = [500, 'Data Bosses', 'Masters of Procrastanition', '02-15-2018', 74]
 
         self.data = []
         self.data.append(G1)
