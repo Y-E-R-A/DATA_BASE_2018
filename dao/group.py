@@ -16,11 +16,14 @@ class groupDAO:
     def getAllGroups(self):
         return self.data
 
-    def getGroupsById(self, uid):
+    def getGroupsById(self, gid):
+        result = []
         for r in self.data:
-            if uid == r[0]:
-                return r
-        return None
+            if gid == r[0]:
+                result.append(r)
+        if len(result) == 0:
+            return None
+        return result
 
     def getGroupsByName(self, groupname):
         result = []
@@ -57,4 +60,6 @@ class groupDAO:
         if len(result) == 0:
             return None
         return result
+
+
 

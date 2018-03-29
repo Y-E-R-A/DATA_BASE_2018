@@ -76,10 +76,10 @@ def getCredentialsById(cid):
 def getCredentialsByUserId(uid):
     return CredentialsHandler().getCredentialsByUserId(uid)
 
+
 ##################
 #   MESSAGES     #
 # ################
-
 
 @app.route('/MessagingAppP1/messages')
 def getAllMessages():
@@ -146,9 +146,8 @@ def getByUserId(uid):
 
 
 ######################
-#TEST FOR Reaction#
+#  TEST FOR Reaction #
 ######################
-
 @app.route('/MessagingAppP1/reactions')
 def getAllReactions():
    if request.args:
@@ -177,7 +176,6 @@ def getLikesDislikes(rating):
 ##################
 #  Participation #
 # ################
-
 @app.route('/MessagingAppP1/PinRelation')
 def getAllPinRelation():
     handler = PinHandler()
