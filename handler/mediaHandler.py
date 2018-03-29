@@ -7,7 +7,8 @@ class MediaHandler:
         result['meid'] = row[0]
         result['mename'] = row[1]
         result['meaddress'] = row[2]
-        result['mid'] = row[3]
+        result['metype'] = row[3]
+        result['mid'] = row[4]
 
         return result
 
@@ -46,6 +47,17 @@ class MediaHandler:
     def getMediaByAddress(self, meaddress):
         dao = mediaDAO()
         result = dao.getMediaByAddress(meaddress)
+        mapped_result = []
+        if result == None:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            for r in result:
+                mapped_result.append(self.mapToDict(r))
+            return jsonify(User=mapped_result)
+
+    def getMediaByType(self, metype):
+        dao = mediaDAO()
+        result = dao.getMediaByType(metype)
         mapped_result = []
         if result == None:
             return jsonify(Error="NOT FOUND"), 404

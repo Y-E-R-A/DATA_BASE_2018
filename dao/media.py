@@ -1,10 +1,10 @@
 class mediaDAO:
     def __init__(self):
-        ME1 = [15, 'Avengers', 'Youtube', 74]
-        ME2 = [30, 'Simple Men', 'Vevo', 155]
-        ME3 = [45, 'Club Salsa', 'Android Disc', 122]
-        ME4 = [60, 'El Yunque', 'Iphone Disc', 757]
-        ME5 = [575, 'Run for Cover', 'Vevo', 74]
+        ME1 = [15, 'Avengers', 'Youtube','Video', 74]
+        ME2 = [30, 'Simple Men', 'Vevo','Video', 155]
+        ME3 = [45, 'Club Salsa', 'Android Disc','Photo',  122]
+        ME4 = [60, 'El Yunque', 'Iphone Disc','Photo', 757]
+        ME5 = [575,'Run for Cover', 'Vevo','Video',  74]
 
         self.data = []
         self.data.append(ME1)
@@ -25,6 +25,7 @@ class mediaDAO:
             return None
         return result
 
+
     def getMediaByName(self, mename):
         result = []
         for r in self.data:
@@ -43,10 +44,19 @@ class mediaDAO:
             return None
         return result
 
+    def getMediaByType(self, metype):
+        result = []
+        for r in self.data:
+            if metype == r[3]:
+                result.append(r)
+        if len(result) == 0:
+            return None
+        return result
+
     def getByMessageId(self, mid):
         result = []
         for r in self.data:
-            if mid == r[3]:
+            if mid == r[4]:
                 result.append(r)
         if len(result) == 0:
             return None

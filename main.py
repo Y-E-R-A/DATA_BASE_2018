@@ -3,6 +3,7 @@ from handler.admins import AdminHandler
 from handler.credentials import CredentialsHandler
 from handler.groups import GroupHandler
 from handler.isPartHandler import IsPartHandler
+from handler.mediaHandler import MediaHandler
 from handler.messages import MessagesHandler
 from handler.participateInHandler import PinHandler
 from handler.reactions import ReactionHandler
@@ -258,7 +259,7 @@ def getIsPartByGroupId(gid):
 
 
 ##################
-#    Is Part     #
+#       Reply    #
 # ################
 
 @app.route('/MessagingAppP1/Reply')
@@ -277,6 +278,37 @@ def getReplyByMessageId(mid):
 def getReplayByGroupId(rid):
     return ReplyHandler().getReplyByReplyToId(rid)
 
+###################
+# TEST FOR MEDIA  #
+###################
+
+@app.route('/MessagingAppP1/media')
+def getAllMedia():
+   if request.args:
+       return MediaHandler.getAllMedia(request.args)
+   else:
+       handler = MediaHandler()
+       return handler.getAllMedia()
+
+@app.route('/MessagingAppP1/media/meid=<int:meid>')
+def getAllMediaById(meid):
+   return MediaHandler().getAllMediaById(meid)
+
+@app.route('/MessagingAppP1/media/mename=<string:mename>')
+def getMediaByName(mename):
+   return MediaHandler().getMediaByName(mename)
+
+@app.route('/MessagingAppP1/media/meaddress=<string:meaddress>')
+def getMediaByAddress(meaddress):
+   return MediaHandler().getMediaByAddress(meaddress)
+
+@app.route('/MessagingAppP1/media/metype=<string:metype>')
+def getMediaByType(metype):
+   return MediaHandler().getMediaByType(metype)
+
+@app.route('/MessagingAppP1/media/mid=<int:mid>')
+def getMediaByMessageId(mid):
+   return MediaHandler().getByMessageId(mid)
 
 
 
