@@ -1,3 +1,15 @@
+#############################################
+# Authors:                                  #
+#   Yomaira Rivera Albarran                 #
+#   Gustavo Hernandez Ortiz                 #
+#   Abdias Santiago Lugo                    #
+#                                           #
+# Date: 3/28/2018                           #
+#                                           #
+# This project P1 implements an application #
+# used for messaging in a social context.   #
+#############################################
+
 from flask import Flask, request
 from handler.admins import AdminHandler
 from handler.credentials import CredentialsHandler
@@ -21,7 +33,6 @@ def home():
 @app.route('/login')
 def login():
     return "No Login for you!!!"
-
 
 
 ##################
@@ -111,8 +122,6 @@ def getMessageByBody(body):
     return MessagesHandler().getMessageByBody(body)
 
 
-
-
 ################
 #TEST FOR GROUP#
 ################
@@ -147,7 +156,7 @@ def getByUserId(uid):
 
 
 ######################
-#  TEST FOR Reaction #
+#     Reaction       #
 ######################
 @app.route('/MessagingAppP1/reactions')
 def getAllReactions():
