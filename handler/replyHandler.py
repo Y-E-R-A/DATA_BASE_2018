@@ -6,7 +6,7 @@ class ReplyHandler:
     #User dictionary
     def mapToDict(self, row):
         result = {}
-        result['id'] = row[0]
+        result['pid'] = row[0]
         result['mid'] = row[1]
         result['rid'] = row[2]
         return result

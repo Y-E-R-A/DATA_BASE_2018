@@ -55,7 +55,7 @@ class groupDAO:
     def getByUserId(self, uid):
         result = []
         for r in self.data:
-            if uid == r[4]:
+              if uid == r[4]:
                 result.append(r)
         if len(result) == 0:
             return None

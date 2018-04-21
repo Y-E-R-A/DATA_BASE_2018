@@ -1,7 +1,7 @@
 from flask import jsonify, request
 from dao.participateInDAO import PinDAO
 
-class PinHandler:
+class ParticipationHandler:
 
     #User dictionary
     def mapToDict(self, row):
@@ -11,7 +11,7 @@ class PinHandler:
         result['gid'] = row[2]
         return result
 
-    def getAllPin(self):
+    def getAllParticipants(self):
         dao = PinDAO()
         result = dao.getAllPin()
         mapped_result = []
@@ -19,7 +19,7 @@ class PinHandler:
             mapped_result.append(self.mapToDict(r))
         return jsonify(ParticipateInRelation=mapped_result)
 
-    def getPinById(self, id):
+    def getParticipantsByPId(self, id):
         dao = PinDAO()
         result = dao.getPinById(id)
         if result == None:
@@ -39,7 +39,7 @@ class PinHandler:
                 mapped_result.append(self.mapToDict(r))
             return jsonify(ParticipateInRelation=mapped_result)
 
-    def getPinByGroupId(self, id):
+    def getParticipantsByGroupId(self, id):
         dao = PinDAO()
         result = dao.getPinByGroupId(id)
         mapped_result = []

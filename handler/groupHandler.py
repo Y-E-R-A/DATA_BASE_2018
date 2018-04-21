@@ -69,6 +69,7 @@ class GroupHandler:
             return jsonify(User=mapped_result)
 
     def getByUserId(self, uid):
+
         dao = groupDAO()
         result = dao.getByUserId(uid)
         mapped_result = []
