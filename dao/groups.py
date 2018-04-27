@@ -28,7 +28,7 @@ class groupDAO:
 
     def getGroupsByName(self, groupname):
         cursor = self.conn.cursor()
-        query = "Select * from Groups where groupname = %s;"
+        query = "Select * from Groups where gname = %s;"
         cursor.execute(query, (groupname,))
         result = []
         for row in cursor:
@@ -46,7 +46,7 @@ class groupDAO:
 
     def getGroupByCreation(self, gdate):
         cursor = self.conn.cursor()
-        query = "Select * from Groups where gdate = %s;"
+        query = "Select * from Groups where gdcreation = %s;"
         cursor.execute(query, (gdate,))
         result = []
         for row in cursor:

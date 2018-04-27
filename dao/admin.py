@@ -15,7 +15,7 @@ class AdminDAO:
 
     def getAllAdmin(self):
         cursor = self.conn.cursor()
-        query = "select * from Admin;"
+        query = "select * from Administrate;"
         cursor.execute(query)
         result = []
 
@@ -26,22 +26,22 @@ class AdminDAO:
 
     def getAdminById(self, id):
         cursor = self.conn.cursor()
-        query = "select * from Admin where id = %s;"
+        query = "select * from Administrate where uid = %s;"
         cursor.execute(query, (id,))
         result = cursor.fetchone()
         return result
 
-    def getAdminByUserId(self, id):
+    def getAdminByUserId(self, uid):
         cursor = self.conn.cursor()
-        query = "select * from Admin where id = %s;"
-        cursor.execute(query, (id,))
+        query = "select * from Administrate where uid = %s;"
+        cursor.execute(query, (uid,))
         result = cursor.fetchone()
         return result
 
-    def getAdminByGroupId(self, id):
+    def getAdminByGroupId(self, gid):
         cursor = self.conn.cursor()
-        query = "select * from Admin where id = %s;"
-        cursor.execute(query, (id,))
+        query = "select * from Administrate where gid = %s;"
+        cursor.execute(query, (gid,))
         result = []
         for row in cursor:
             result.append(row)

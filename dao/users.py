@@ -29,7 +29,7 @@ class UserDAO:
 
     def getUserByName(self, name):
         cursor = self.conn.cursor()
-        query = "select * from Users where name = %s;"
+        query = "select * from Users where ufirst_name = %s;"
         cursor.execute(query, (name,))
         result = []
         for row in cursor:
@@ -38,7 +38,7 @@ class UserDAO:
 
     def getUserByLastname(self, lastname):
         cursor = self.conn.cursor()
-        query = "select * from Users where lastname = %s;"
+        query = "select * from Users where ulast_name = %s;"
         cursor.execute(query, (lastname,))
         result = []
         for row in cursor:

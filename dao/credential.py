@@ -22,7 +22,7 @@ class CredentialsDAO:
 
     def getCredentialsById(self, id):
         cursor = self.conn.cursor()
-        query = "select * from Credentials where id = %s;"
+        query = "select * from Credentials where cid = %s;"
         cursor.execute(query, (id,))
         result = cursor.fetchone()
         return result
@@ -37,7 +37,7 @@ class CredentialsDAO:
 
     def getCredentialsByUsername(self, username):
         cursor = self.conn.cursor()
-        query = "select * from Credentials where username = %s;"
+        query = "select * from Credentials where cusername = %s;"
         cursor.execute(query, (username,))
         result = []
         for row in cursor:
@@ -47,7 +47,7 @@ class CredentialsDAO:
     def getCredentialsByEmail(self, email):
         # Email is unique in a user instance
         cursor = self.conn.cursor()
-        query = "select * from Credentials where email = %s;"
+        query = "select * from Credentials where cemail = %s;"
         cursor.execute(query, (email,))
         result = cursor.fetchone()
         return result

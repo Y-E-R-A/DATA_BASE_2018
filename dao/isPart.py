@@ -18,7 +18,7 @@ class IsPartDAO:
 
     def getIsPartById(self, id):
         cursor = self.conn.cursor()
-        query = "select * from IsPart where id = %s;"
+        query = "select * from IsPart where mid = %s;"
         cursor.execute(query, (id,))
         result = cursor.fetchone()
         return result
@@ -36,7 +36,7 @@ class IsPartDAO:
 
     def getIsPartByGroupId(self, id):
         cursor = self.conn.cursor()
-        query = "select * from IsPart where id =%s;"
+        query = "select * from IsPart where gid =%s;"
         cursor.execute(query, (id,))
         result = []
         for row in cursor:
