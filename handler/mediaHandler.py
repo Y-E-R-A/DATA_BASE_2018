@@ -26,7 +26,7 @@ class MediaHandler:
         dao = mediaDAO()
         result = dao.getMediaByID(meid)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -37,7 +37,7 @@ class MediaHandler:
         dao = mediaDAO()
         result = dao.getMediaByName(mename)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -48,7 +48,7 @@ class MediaHandler:
         dao = mediaDAO()
         result = dao.getMediaByAddress(meaddress)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -59,7 +59,7 @@ class MediaHandler:
         dao = mediaDAO()
         result = dao.getMediaByType(metype)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -70,7 +70,7 @@ class MediaHandler:
         dao = mediaDAO()
         result = dao.getByMessageId(mid)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:

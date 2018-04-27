@@ -22,7 +22,7 @@ class ReplyHandler:
     def getReplyById(self, id):
         dao = ReplyDAO()
         result = dao.getReplyById(id)
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             mapped = self.mapToDict(result)
@@ -32,7 +32,7 @@ class ReplyHandler:
         dao = ReplyDAO()
         result = dao.getReplyByMessageId(id)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"),404
         else:
             for r in result:
@@ -43,7 +43,7 @@ class ReplyHandler:
         dao = ReplyDAO()
         result = dao.getReplyByReplyToId(id)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:

@@ -22,7 +22,7 @@ class ParticipationHandler:
     def getParticipantsByPId(self, id):
         dao = PinDAO()
         result = dao.getPinById(id)
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             mapped = self.mapToDict(result)
@@ -32,7 +32,7 @@ class ParticipationHandler:
         dao = PinDAO()
         result = dao.getPinByUserId(id)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"),404
         else:
             for r in result:
@@ -43,7 +43,7 @@ class ParticipationHandler:
         dao = PinDAO()
         result = dao.getPinByGroupId(id)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:

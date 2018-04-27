@@ -1,39 +1,46 @@
+from configs.dbconfig import pg_config
+import psycopg2
+
 class ReplyDAO:
     def __init__(self):
-        # mid: is the id of the reply message
-        # rid: is the id of the message that is being replied to
-        # = [pid,mid, rid]
-        # = [primaryId,messageId,replyToId]
-        U1 = [54, 5, 4]
-        U2 = [31, 3, 1]
-
-        self.data = []
-        self.data.append(U1)
-        self.data.append(U2)
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 
     def getAllReply(self):
-        return self.data
+        cursor = self.conn.cursor()
+        query = "select * from Reply;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
     def getReplyById(self, id):
-        for r in self.data:
-            if id == r[0]:
-                return r
-        return None
-
-    def getReplyByMessageId(self, id):
+        cursor = self.conn.cursor()
+        query = "select * from reply where id = %s;"
+        cursor.execute(query, (id))
         result = []
-        for r in self.data:
-            if id == r[1]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getReplyByReplyToId(self, id):
+    def getReplyByMessageId(self, mid):
+        cursor = self.conn.cursor()
+        query = "select * from reply where mid = %s;"
+        cursor.execute(query, (mid))
         result = []
-        for r in self.data:
-            if id == r[2]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
+
+    def getReplyByReplyToId(self, rid):
+        cursor = self.conn.cursor()
+        query = "select * from reply where rid = %s;"
+        cursor.execute(query, (rid))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+

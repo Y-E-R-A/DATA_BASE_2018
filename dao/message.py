@@ -1,53 +1,57 @@
+from configs.dbconfig import pg_config
+import psycopg2
+
 class messageDAO:
     def __init__(self):
-        mes1 = [1,'04-26-2018-12:00pm', 'Haciendo el proyecto de db', 122];
-        mes2 = [2,'04-26-2018-12:10pm', 'Dale, me reuno pronto', 74];
-        mes3 = [3,'04-26-2018-1:25pm', 'Ya sali de clase, voy por ahi', 122];
-        mes4 = [4,'04-26-2018-12:10pm', 'Esto se termina hoy amanecido', 74];
-
-        self.data = []
-        self.data.append(mes1)
-        self.data.append(mes2)
-        self.data.append(mes3)
-        self.data.append(mes4)
-
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 
     def getAllMessages(self):
-        return self.data
+        cursor = self.conn.cursor()
+        query = "select * from Messages;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
     def getMessageById(self, mid):
+        cursor = self.conn.cursor()
+        query = "select * from Messages where mid = %s;"
+        cursor.execute(query, (mid))
         result = []
-        for r in self.data:
-            if mid == r[0]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getMessageByDate(self, date):
+    def getMessageByDate(self, mdate):
+        cursor = self.conn.cursor()
+        query = "select * from Messages where mdate = %s;"
+        cursor.execute(query, (mdate))
         result = []
-        for r in self.data:
-            if date == r[1]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getMessageByBody(self, body):
+        ##Originally getByBody
+
+    def getMessageByInfo(self, minfo):
+        cursor = self.conn.cursor()
+        query = "select * from Messages where minfo = %s;"
+        cursor.execute(query, (minfo))
         result = []
-        for r in self.data:
-            if body == r[2]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getAllMessageBySenderId(self, sid):
+    def getAllMessageByUserId(self, uid):
+        cursor = self.conn.cursor()
+        query = "select * from Messages where uid = %s;"
+        cursor.execute(query, (uid))
         result = []
-        for r in self.data:
-            if sid == r[3]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 

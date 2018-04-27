@@ -1,65 +1,66 @@
+from configs.dbconfig import pg_config
+import psycopg2
+
 class mediaDAO:
     def __init__(self):
-        ME1 = [15, 'Avengers', 'Youtube','Video', 74]
-        ME2 = [30, 'Simple Men', 'Vevo','Video', 155]
-        ME3 = [45, 'Club Salsa', 'Android Disc','Photo',  122]
-        ME4 = [60, 'El Yunque', 'Iphone Disc','Photo', 757]
-        ME5 = [575,'Run for Cover', 'Vevo','Video',  74]
-
-        self.data = []
-        self.data.append(ME1)
-        self.data.append(ME2)
-        self.data.append(ME3)
-        self.data.append(ME4)
-        self.data.append(ME5)
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 
     def getAllMedia(self):
-        return self.data
-
-    def getMediaByID(self, meid):
+        cursor = self.conn.cursor()
+        query = "select * from Media;"
+        cursor.execute(query)
         result = []
-        for r in self.data:
-            if meid == r[0]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
+    def getMediaByID(self, meid):
+        cursor = self.conn.cursor()
+        query = "select * from Media where meid = %s;"
+        cursor.execute(query, (meid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
     def getMediaByName(self, mename):
+        cursor = self.conn.cursor()
+        query = "select * from Media where mename = %s;"
+        cursor.execute(query, (mename,))
         result = []
-        for r in self.data:
-            if mename == r[1]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
     def getMediaByAddress(self, meaddress):
+        cursor = self.conn.cursor()
+        query = "select * from Media where meaddress = %s;"
+        cursor.execute(query, (meaddress,))
         result = []
-        for r in self.data:
-            if meaddress == r[2]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
     def getMediaByType(self, metype):
+        cursor = self.conn.cursor()
+        query = "select * from Media where metype = %s;"
+        cursor.execute(query, (metype,))
         result = []
-        for r in self.data:
-            if metype == r[3]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
     def getByMessageId(self, mid):
+        cursor = self.conn.cursor()
+        query = "select * from Media where mid = %s;"
+        cursor.execute(query, (mid,))
         result = []
-        for r in self.data:
-            if mid == r[4]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
+
 
 

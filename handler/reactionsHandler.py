@@ -25,7 +25,7 @@ class ReactionHandler:
         dao = ReactionDAO()
         result = dao.getByReactionId(rid)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -36,7 +36,7 @@ class ReactionHandler:
         dao = ReactionDAO()
         result = dao.getByMessageID(mid)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -47,7 +47,7 @@ class ReactionHandler:
         dao = ReactionDAO()
         result = dao.getByUserId(uid)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -58,7 +58,7 @@ class ReactionHandler:
         dao = ReactionDAO()
         result = dao.getByLikeDislike(rating)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:

@@ -1,51 +1,48 @@
+from configs.dbconfig import pg_config
+import psycopg2
+
+
 class PinDAO:
     def __init__(self):
-        U1 = [122100, 122, 100]
-        U2 = [74100, 74, 100]
-        U3 = [849100, 849, 100]
-        U4 = [122200, 122, 200]
-        U5 = [74200, 74, 200]
-        U6 = [849200, 849, 200]
-        U7 = [757300, 757, 300]
-        U8 = [74400, 74, 400]
-        U9 = [849400, 849, 400]
-        U10 = [757400, 757, 400]
-
-        self.data = []
-        self.data.append(U1)
-        self.data.append(U2)
-        self.data.append(U3)
-        self.data.append(U4)
-        self.data.append(U5)
-        self.data.append(U6)
-        self.data.append(U7)
-        self.data.append(U8)
-        self.data.append(U9)
-        self.data.append(U10)
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 
     def getAllPin(self):
-        return self.data
+        cursor = self.conn.cursor()
+        query = "select * from Participates;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
     def getPinById(self, id):
-        for r in self.data:
-            if id == r[0]:
-                return r
-        return None
-
-    def getPinByUserId(self, id):
+        cursor = self.conn.cursor()
+        query = "select * from Participates where id = %s;"
+        cursor.execute(query, (id))
         result = []
-        for r in self.data:
-            if id == r[1]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getPinByGroupId(self, id):
+    def getPinByUserId(self, uid):
+        cursor = self.conn.cursor()
+        query = "select * from Participates where uid = %s;"
+        cursor.execute(query, (uid))
         result = []
-        for r in self.data:
-            if id == r[2]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
+
+    def getPinByGroupId(self, gid):
+        cursor = self.conn.cursor()
+        query = "select * from Participates where gid = %s;"
+        cursor.execute(query, (gid))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+

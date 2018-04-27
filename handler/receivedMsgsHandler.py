@@ -22,7 +22,7 @@ class ReceivedMsgHandler:
     def getReceivedMsgById(self, id):
         dao = ReceivedMsgDAO()
         result = dao.getReceivedMsgById(id)
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             mapped = self.mapToDict(result)
@@ -32,7 +32,7 @@ class ReceivedMsgHandler:
         dao = ReceivedMsgDAO()
         result = dao.getReceivedMsgByUserId(uid)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -43,7 +43,7 @@ class ReceivedMsgHandler:
         dao = ReceivedMsgDAO()
         result = dao.getReceivedMsgByMessageId(mid)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:

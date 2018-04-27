@@ -1,43 +1,45 @@
+from configs.dbconfig import pg_config
+import psycopg2
+
 class ReceivedMsgDAO:
     def __init__(self):
-        # = [pid,uid, mid]
-        # = [primaryId,UserId,messageId]
-        U1 = [1221, 122, 1]
-        U2 = [742, 74, 2]
-        U3 = [1223, 122, 3]
-        U4 = [744, 74, 4]
-
-        self.data = []
-        self.data.append(U1)
-        self.data.append(U2)
-        self.data.append(U3)
-        self.data.append(U4)
-
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 
     def getAllReceivedMsg(self):
-        return self.data
-
-    def getReceivedMsgById(self, msgSid):
-        for r in self.data:
-            if msgSid == r[0]:
-                return r
-        return None
-
-
-    def getReceivedMsgByUserId(self, id):
+        cursor = self.conn.cursor()
+        query = "select * from Receive;"
+        cursor.execute(query)
         result = []
-        for r in self.data:
-            if id == r[1]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getReceivedMsgById(self, mid):
+        cursor = self.conn.cursor()
+        query = "select * from Receive where mid = %s;"
+        cursor.execute(query, (mid))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getReceivedMsgByUserId(self, uid):
+        cursor = self.conn.cursor()
+        query = "select * from Receive where uid = %s;"
+        cursor.execute(query, (uid))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getReceivedMsgByMessageId(self, id):
+        cursor = self.conn.cursor()
+        query = "select * from Receive where id = %s;"
+        cursor.execute(query, (id))
         result = []
-        for r in self.data:
-            if id == r[2]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result

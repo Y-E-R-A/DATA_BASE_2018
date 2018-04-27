@@ -25,7 +25,7 @@ class MessagesHandler:
     def getMessageById(self, mid):
         result = messageDAO().getMessageById(mid)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -36,7 +36,7 @@ class MessagesHandler:
     def getAllMessageBySenderId(self, sid):
             result = messageDAO().getAllMessageBySenderId(sid)
             mapped_result = []
-            if result == None:
+            if not result:
                 return jsonify(Error="NOT FOUND"), 404
             else:
                 for r in result:
@@ -47,7 +47,7 @@ class MessagesHandler:
     def getMessageByDate(self, date):
         result = messageDAO().getMessageByDate(date)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -55,11 +55,11 @@ class MessagesHandler:
 
             return jsonify(Messages=mapped_result)
 
-    def getMessageByBody(self, body):
-        result = messageDAO().getMessageByBody(body)
+    def getMessageByInfo(self, info):
+        result = messageDAO().getMessageByInfo(info)
         mapped_result = []
 
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:

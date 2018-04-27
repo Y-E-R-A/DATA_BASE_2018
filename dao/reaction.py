@@ -1,54 +1,57 @@
+from configs.dbconfig import pg_config
+import psycopg2
+
+
 class ReactionDAO:
     def __init__(self):
-        r1 = [1122,1,122,'Like']
-        r2 = [274,2, 74,'Dislike']
-        r3 = [3849,3, 849,'Like']
-        r4 = [4757,4, 757,'Like']
-        r5 = [5800,5, 800,'Dislike']
-
-        self.data = []
-        self.data.append(r1)
-        self.data.append(r2)
-        self.data.append(r3)
-        self.data.append(r4)
-        self.data.append(r5)
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 
     def getAllReactions(self):
-        return self.data
+        cursor = self.conn.cursor()
+        query = "select * from Reaction;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
     def getByReactionId(self, rid):
+        cursor = self.conn.cursor()
+        query = "select * from Reaction where rid = %s;"
+        cursor.execute(query, (rid,))
         result = []
-        for r in self.data:
-            if rid == r[0]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
     def getByMessageID(self, mid):
+        cursor = self.conn.cursor()
+        query = "select * from Reaction where mid = %s;"
+        cursor.execute(query, (mid,))
         result = []
-        for r in self.data:
-            if mid == r[1]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
     def getByUserId(self, uid):
+        cursor = self.conn.cursor()
+        query = "select * from Reaction where uid = %s;"
+        cursor.execute(query, (uid,))
         result = []
-        for r in self.data:
-            if uid == r[2]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getByLikeDislike(self,rating):
+    def getByLikeDislike(self, rating):
+        cursor = self.conn.cursor()
+        query = "select * from Reaction where rating = %s;"
+        cursor.execute(query, (rating,))
         result = []
-        for r in self.data:
-            if rating == r[3]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
+
 

@@ -29,8 +29,8 @@ class CredentialsDAO:
 
     def getCredentialsByUserId(self, uid):
         cursor = self.conn.cursor()
-        query = "select * from Credentials where id = %s;"
-        cursor.execute(query, (id,))
+        query = "select * from Credentials where uid = %s;"
+        cursor.execute(query, (uid,))
         result = cursor.fetchone()
         return result
 

@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from dao.group import groupDAO
+from dao.groups import groupDAO
 
 class GroupHandler:
 
