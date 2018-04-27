@@ -1,43 +1,45 @@
+from configs.dbconfig import pg_config
+import psycopg2
+
 class IsPartDAO:
     def __init__(self):
-        # = [pid,mid, gid]
-        # = [primaryId,messageId,groupId]
-        U1 = [5100, 5, 100]
-        U2 = [4100, 4, 100]
-        U3 = [2200, 2, 300]
-        U4 = [3200, 3, 200]
-        U5 = [1200, 1, 200]
-
-        self.data = []
-        self.data.append(U1)
-        self.data.append(U2)
-        self.data.append(U3)
-        self.data.append(U4)
-        self.data.append(U5)
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 
     def getAllIsPart(self):
-        return self.data
+        cursor = self.conn.cursor()
+        query = "select * from IsPart;"
+        cursor.execute(query)
+        result = cursor.fetchone()
+
+        return result
 
     def getIsPartById(self, id):
-        for r in self.data:
-            if id == r[0]:
-                return r
-        return None
-
-    def getIsPartByMessageId(self, id):
-        result = []
-        for r in self.data:
-            if id == r[1]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        cursor = self.conn.cursor()
+        query = "select * from IsPart where id = %s;"
+        cursor.execute(query, (id,))
+        result = cursor.fetchone()
         return result
+
+
+    def getIsPartByMessageId(self, mid):
+        cursor = self.conn.cursor()
+        query = "select * from IsPart where mid =%s;"
+        cursor.execute(query, (mid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
 
     def getIsPartByGroupId(self, id):
+        cursor = self.conn.cursor()
+        query = "select * from IsPart where id =%s;"
+        cursor.execute(query, (id,))
         result = []
-        for r in self.data:
-            if id == r[2]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
+

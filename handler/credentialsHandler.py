@@ -16,7 +16,7 @@ class CredentialsHandler:
     def getAllCredentials(self):
         result = CredentialsDAO().getAllCredentials()
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -28,7 +28,7 @@ class CredentialsHandler:
     def getCredentialsById(self, cid):
         result = CredentialsDAO().getCredentialsById(cid)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -39,7 +39,7 @@ class CredentialsHandler:
     def getCredentialsByUserId(self, uid):
         result = CredentialsDAO().getCredentialsByUserId(uid)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -49,7 +49,7 @@ class CredentialsHandler:
     def getCredentialsByUsername(self, username):
         result = CredentialsDAO().getCredentialsByUsername(username)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -59,7 +59,7 @@ class CredentialsHandler:
     def getCredentialsByEmail(self, email):
         # The first user with 'email' will be the mapped result
         result = CredentialsDAO().getCredentialsByEmail(email)
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             mapped_result = self.mapToUserDict(result)

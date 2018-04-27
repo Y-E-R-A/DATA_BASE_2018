@@ -22,7 +22,7 @@ class AdminHandler:
     def getAdminById(self, id):
         dao = AdminDAO()
         result = dao.getAdminById(id)
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             mapped = self.mapToDict(result)
@@ -32,7 +32,7 @@ class AdminHandler:
         dao = AdminDAO()
         result = dao.getAdminByUserId(id)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"),404
         else:
             for r in result:
@@ -43,7 +43,7 @@ class AdminHandler:
         dao = AdminDAO()
         result = dao.getAdminByGroupId(id)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:

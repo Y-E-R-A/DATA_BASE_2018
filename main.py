@@ -78,6 +78,7 @@ def getReactionByUserId(uid):
 @app.route('/MessagingAppP1/user/<int:uid>/credentials')
 def getCredentialsByUserId(uid):
     return CredentialsHandler().getCredentialsByUserId(uid)
+
 @app.route('/MessagingAppP1/user/username/<string:username>/credentials')
 def getCredentialsByUsername(username):
     return CredentialsHandler().getCredentialsByUsername(username)
@@ -101,6 +102,7 @@ def getReceivedMsgByUserId(uid):
 def getUserGroups(uid):
    return GroupHandler().getByUserId(uid)
 
+
 ##################
 #   CREDENTIALS  #
 # ################
@@ -109,6 +111,7 @@ def getUserGroups(uid):
 @app.route('/MessagingAppP1/credentials')
 def getAllCredentials():
     return CredentialsHandler().getAllCredentials()
+
 @app.route('/MessagingAppP1/credentials/<int:cid>')
 def getCredentialsById(cid):
     return CredentialsHandler().getCredentialsById(cid)
@@ -126,6 +129,7 @@ def getAllMessages():
     else:
         handler = MessagesHandler()
         return handler.getAllMessages()
+
 @app.route('/MessagingAppP1/messages/<int:mid>')
 def getMessageById(mid):
     return MessagesHandler().getMessageById(mid)
@@ -161,6 +165,7 @@ def getReplyByMessageId(mid):
 @app.route('/MessagingAppP1/MessageReply/replymessage/<int:rid>')
 def getReplayByReplyToId(rid): #Search by reply message id
     return ReplyHandler().getReplyByReplyToId(rid)
+
 
 ################
 #     GROUPS   #

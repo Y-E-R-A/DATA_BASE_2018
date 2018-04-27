@@ -1,64 +1,66 @@
+from configs.dbconfig import pg_config
+import psycopg2
+
 class groupDAO:
     def __init__(self):
-        G1 = [100, 'Data Bosses', 'Masters in the art of data', '02-15-2018', 74]
-        G2 = [200, 'Rojo, Negro y Algo Mas', 'Los Leones de Ponce', '01-25-2018', 155]
-        G3 = [300, 'Arquis Picasso', 'Brindando belleza a los circuitos', '02-16-2018', 122]
-        G4 = [400, 'Los Pericos', '', '04-26-2018', 757]
-        G5 = [500, 'Data Bosses', 'Masters of Procrastanition', '02-15-2018', 74]
-
-        self.data = []
-        self.data.append(G1)
-        self.data.append(G2)
-        self.data.append(G3)
-        self.data.append(G4)
-        self.data.append(G5)
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
+                                                            pg_config['user'],
+                                                            pg_config['passwd'])
+        self.conn = psycopg2._connect(connection_url)
 
     def getAllGroups(self):
-        return self.data
-
-    def getGroupsById(self, gid):
+        cursor = self.conn.cursor()
+        query = "Select * from Groups;"
+        cursor.execute(query)
         result = []
-        for r in self.data:
-            if gid == r[0]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
+
+    def getGroupsById(self, gid):
+        cursor = self.conn.cursor()
+        query = "select * from parts where gid = %s;"
+        cursor.execute(query, (gid,))
+        result = cursor.fetchone()
+        return result
+
+
     def getGroupsByName(self, groupname):
+        cursor = self.conn.cursor()
+        query = "Select * from Groups where groupname = %s;"
+        cursor.execute(query, (groupname,))
         result = []
-        for r in self.data:
-            if groupname == r[1]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
     def getGroupsByDescription(self, gdescription):
+        cursor = self.conn.cursor()
+        query = "Select * from Groups where gdescription = %s;"
+        cursor.execute(query, (gdescription,))
         result = []
-        for r in self.data:
-            if gdescription == r[2]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
     def getGroupByCreation(self, gdate):
+        cursor = self.conn.cursor()
+        query = "Select * from Groups where gdate = %s;"
+        cursor.execute(query, (gdate,))
         result = []
-        for r in self.data:
-            if gdate == r[3]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
+
     def getByUserId(self, uid):
+        cursor = self.conn.cursor()
+        query = "Select * from Groups where uid = %s;"
+        cursor.execute(query, (uid,))
         result = []
-        for r in self.data:
-              if uid == r[4]:
-                result.append(r)
-        if len(result) == 0:
-            return None
+        for row in cursor:
+            result.append(row)
         return result
 
 

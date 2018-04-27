@@ -17,7 +17,7 @@ class UsersHandler:
     def getAllUsers(self):
         result = UserDAO().getAllUsers()
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -29,7 +29,7 @@ class UsersHandler:
     def getUserById(self, uid):
         result = UserDAO().getUserById(uid)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -40,7 +40,7 @@ class UsersHandler:
     def getUserByName(self, name):
         result = UserDAO().getUserByName(name)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -50,7 +50,7 @@ class UsersHandler:
     def getUserByLastname(self, lastname):
         result = UserDAO().getUserByLastname(lastname)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
@@ -60,7 +60,7 @@ class UsersHandler:
     def getUserByPhone(self, phone):
         # The first user with 'phone' will be the mapped result
         result = UserDAO().getUserByPhone(phone)
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             mapped_result = self.mapToUserDict(result)

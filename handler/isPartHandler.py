@@ -22,7 +22,7 @@ class IsPartHandler:
     def getIsPartById(self, id):
         dao = IsPartDAO()
         result = dao.getIsPartById(id)
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             mapped = self.mapToDict(result)
@@ -32,7 +32,7 @@ class IsPartHandler:
         dao = IsPartDAO()
         result = dao.getIsPartByMessageId(id)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"),404
         else:
             for r in result:
@@ -43,7 +43,7 @@ class IsPartHandler:
         dao = IsPartDAO()
         result = dao.getIsPartByGroupId(id)
         mapped_result = []
-        if result == None:
+        if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
