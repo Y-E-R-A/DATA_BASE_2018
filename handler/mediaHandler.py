@@ -5,10 +5,10 @@ class MediaHandler:
     def mapToDict(self, row):
         result = {}
         result['meid'] = row[0]
-        result['mename'] = row[1]
-        result['meaddress'] = row[2]
-        result['metype'] = row[3]
-        result['mid'] = row[4]
+        result['mid'] = row[1]
+        result['name'] = row[2]
+        result['address'] = row[3]
+        result['type'] = row[4]
 
         return result
 

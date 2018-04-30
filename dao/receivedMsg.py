@@ -17,10 +17,10 @@ class ReceivedMsgDAO:
             result.append(row)
         return result
 
-    def getReceivedMsgById(self, mid):
+    def getReceivedMsgById(self, id):
         cursor = self.conn.cursor()
-        query = "select * from Receive where mid = %s;"
-        cursor.execute(query, (mid))
+        query = "select * from Receive where id = %s;"
+        cursor.execute(query, (id,))
         result = []
         for row in cursor:
             result.append(row)
@@ -29,16 +29,16 @@ class ReceivedMsgDAO:
     def getReceivedMsgByUserId(self, uid):
         cursor = self.conn.cursor()
         query = "select * from Receive where uid = %s;"
-        cursor.execute(query, (uid))
+        cursor.execute(query, (uid,))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    def getReceivedMsgByMessageId(self, id):
+    def getReceivedMsgByMessageId(self, mid):
         cursor = self.conn.cursor()
-        query = "select * from Receive where id = %s;"
-        cursor.execute(query, (id))
+        query = "select * from Receive where mid = %s;"
+        cursor.execute(query, (mid,))
         result = []
         for row in cursor:
             result.append(row)

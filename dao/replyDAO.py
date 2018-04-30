@@ -20,7 +20,7 @@ class ReplyDAO:
     def getReplyById(self, id):
         cursor = self.conn.cursor()
         query = "select * from reply where id = %s;"
-        cursor.execute(query, (id))
+        cursor.execute(query, (id,))
         result = []
         for row in cursor:
             result.append(row)
@@ -29,7 +29,7 @@ class ReplyDAO:
     def getReplyByMessageId(self, mid):
         cursor = self.conn.cursor()
         query = "select * from reply where mid = %s;"
-        cursor.execute(query, (mid))
+        cursor.execute(query, (mid,))
         result = []
         for row in cursor:
             result.append(row)
@@ -38,7 +38,7 @@ class ReplyDAO:
     def getReplyByReplyToId(self, rid):
         cursor = self.conn.cursor()
         query = "select * from reply where rid = %s;"
-        cursor.execute(query, (rid))
+        cursor.execute(query, (rid,))
         result = []
         for row in cursor:
             result.append(row)

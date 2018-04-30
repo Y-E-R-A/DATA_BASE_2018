@@ -20,20 +20,23 @@ class CredentialsDAO:
         return result
 
 
-    def getCredentialsById(self, id):
+    def getCredentialsById(self, cid):
         cursor = self.conn.cursor()
         query = "select * from Credentials where cid = %s;"
-        cursor.execute(query, (id,))
-        result = cursor.fetchone()
+        cursor.execute(query, (cid,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
-    def getCredentialsByUserId(self, uid):
+    def getCredentialsByPassword(self, cpassword):
         cursor = self.conn.cursor()
-        query = "select * from Credentials where uid = %s;"
-        cursor.execute(query, (uid,))
-        result = cursor.fetchone()
+        query = "select * from Credentials where cpassword = %s;"
+        cursor.execute(query, (cpassword,))
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
-
 
     def getCredentialsByUsername(self, username):
         cursor = self.conn.cursor()
@@ -49,6 +52,17 @@ class CredentialsDAO:
         cursor = self.conn.cursor()
         query = "select * from Credentials where cemail = %s;"
         cursor.execute(query, (email,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
+    #Does not exist in DB
+    def getCredentialsByUserId(self, uid):
+        cursor = self.conn.cursor()
+        query = "select * from Credentials where uid = %s;"
+        cursor.execute(query, (uid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

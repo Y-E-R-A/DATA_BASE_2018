@@ -20,9 +20,11 @@ class groupDAO:
 
     def getGroupsById(self, gid):
         cursor = self.conn.cursor()
-        query = "select * from parts where gid = %s;"
+        query = "select * from Groups where gid = %s;"
         cursor.execute(query, (gid,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
 

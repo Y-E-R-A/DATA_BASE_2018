@@ -7,10 +7,9 @@ class CredentialsHandler:
     def mapToUserDict(self, row):
         result = {}
         result['cid'] = row[0]
-        result['uid'] = row[1]
+        result['password'] = row[1]
         result['username'] = row[2]
         result['email'] = row[3]
-        result['password'] = row[4]
         return result
 
     def getAllCredentials(self):
@@ -36,6 +35,17 @@ class CredentialsHandler:
 
             return jsonify(User= mapped_result)
 
+    def getCredentialsByPassword(self, cpassword):
+        result = CredentialsDAO().getCredentialsByPassword(cpassword)
+        mapped_result = []
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            for r in result:
+                 mapped_result.append(self.mapToUserDict(r))
+
+            return jsonify(User= mapped_result)
+    #Does not exist in Credentials
     def getCredentialsByUserId(self, uid):
         result = CredentialsDAO().getCredentialsByUserId(uid)
         mapped_result = []
@@ -56,11 +66,12 @@ class CredentialsHandler:
                 mapped_result.append(self.mapToUserDict(r))
             return jsonify(User=mapped_result)
 
-    def getCredentialsByEmail(self, email):
-        # The first user with 'email' will be the mapped result
-        result = CredentialsDAO().getCredentialsByEmail(email)
+    def getCredentialsByEmail(self, cemail):
+        result = CredentialsDAO().getCredentialsByEmail(cemail)
+        mapped_result = []
         if not result:
             return jsonify(Error="NOT FOUND"), 404
         else:
-            mapped_result = self.mapToUserDict(result)
-            return jsonify(User= mapped_result)
+            for r in result:
+                mapped_result.append(self.mapToUserDict(r))
+            return jsonify(User=mapped_result)

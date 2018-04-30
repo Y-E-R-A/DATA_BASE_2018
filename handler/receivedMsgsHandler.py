@@ -6,9 +6,9 @@ class ReceivedMsgHandler:
     #User dictionary
     def mapToDict(self, row):
         result = {}
-        result['id'] = row[0]
+        result['mid'] = row[0]
         result['uid'] = row[1]
-        result['mid'] = row[2]
+        #result['mid'] = row[2]
         return result
 
     def getAllReceivedMsg(self):

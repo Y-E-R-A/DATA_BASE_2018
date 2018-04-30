@@ -18,9 +18,10 @@ class messageDAO:
         return result
 
     def getMessageById(self, mid):
+        print (mid)
         cursor = self.conn.cursor()
         query = "select * from Messages where mid = %s;"
-        cursor.execute(query, (mid))
+        cursor.execute(query, (mid,))
         result = []
         for row in cursor:
             result.append(row)
@@ -29,7 +30,7 @@ class messageDAO:
     def getMessageByDate(self, mdate):
         cursor = self.conn.cursor()
         query = "select * from Messages where mdate = %s;"
-        cursor.execute(query, (mdate))
+        cursor.execute(query, (mdate,))
         result = []
         for row in cursor:
             result.append(row)
@@ -40,7 +41,7 @@ class messageDAO:
     def getMessageByInfo(self, minfo):
         cursor = self.conn.cursor()
         query = "select * from Messages where minfo = %s;"
-        cursor.execute(query, (minfo))
+        cursor.execute(query, (minfo,))
         result = []
         for row in cursor:
             result.append(row)
@@ -49,7 +50,7 @@ class messageDAO:
     def getAllMessageByUserId(self, uid):
         cursor = self.conn.cursor()
         query = "select * from Messages where uid = %s;"
-        cursor.execute(query, (uid))
+        cursor.execute(query, (uid,))
         result = []
         for row in cursor:
             result.append(row)

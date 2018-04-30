@@ -6,9 +6,9 @@ class ParticipationHandler:
     #User dictionary
     def mapToDict(self, row):
         result = {}
-        result['id'] = row[0]
-        result['uid'] = row[1]
-        result['gid'] = row[2]
+        result['uid'] = row[0]
+        result['gid'] = row[1]
+        #result['gid'] = row[2]
         return result
 
     def getAllParticipants(self):

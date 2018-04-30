@@ -4,10 +4,10 @@ from dao.reaction import ReactionDAO
 class ReactionHandler:
     def mapToDict(self, row):
         result = {}
-        result['rid'] = row[0]
-        result['mid'] = row[1]
-        result['uid'] = row[2]
-        result['rating'] = row[3]
+        #result['rid'] = row[0]
+        result['mid'] = row[0]
+        result['uid'] = row[1]
+        result['rating'] = row[2]
 
         return result
 

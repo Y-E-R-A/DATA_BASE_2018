@@ -23,7 +23,9 @@ class UserDAO:
         cursor = self.conn.cursor()
         query = "select * from Users where uid = %s;"
         cursor.execute(query, (uid,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
 
         return result
 
@@ -52,3 +54,11 @@ class UserDAO:
         cursor.execute(query, (phone,))
         result = cursor.fetchone()
         return result
+
+    def getUserByDescription(self, udescription):
+        cursor = self.conn.cursor()
+        query = "select * from Users where udescription = %s;"
+        cursor.execute(query, (udescription,))
+        result = cursor.fetchone()
+        return result
+

@@ -8,8 +8,8 @@ class MessagesHandler:
         result = {}
         result['mid'] = row[0]
         result['date'] = row[1]
-        result['body'] = row[2]
-        result['sid']= row[3]
+        result['info'] = row[2]
+        result['uid']= row[3]
         return result
 
 
@@ -23,6 +23,7 @@ class MessagesHandler:
 
 
     def getMessageById(self, mid):
+        print (mid)
         result = messageDAO().getMessageById(mid)
         mapped_result = []
         if not result:
@@ -33,8 +34,9 @@ class MessagesHandler:
 
             return jsonify(Messages=mapped_result)
 
-    def getAllMessageBySenderId(self, sid):
-            result = messageDAO().getAllMessageBySenderId(sid)
+    def getAllMessageBySenderId(self, uid):
+
+            result = messageDAO().getAllMessageByUserId(uid)
             mapped_result = []
             if not result:
                 return jsonify(Error="NOT FOUND"), 404
@@ -55,8 +57,8 @@ class MessagesHandler:
 
             return jsonify(Messages=mapped_result)
 
-    def getMessageByInfo(self, info):
-        result = messageDAO().getMessageByInfo(info)
+    def getMessageByInfo(self, minfo):
+        result = messageDAO().getMessageByInfo(minfo)
         mapped_result = []
 
         if not result:

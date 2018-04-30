@@ -67,6 +67,9 @@ def getUserByLastname(lastname):
 @app.route('/MessagingAppP1/user/phone/<string:phone>')
 def getUserByPhone(phone):
     return UsersHandler().getUserByPhone(phone)
+@app.route('/MessagingAppP1/user/description/<string:udescription>')
+def getUserByDescription(udescription):
+    return UsersHandler().getUserByDescription(udescription)
 
 
 #USER REACTIONS
@@ -75,17 +78,22 @@ def getReactionByUserId(uid):
    return ReactionHandler().getByUserId(uid)
 
 #USER CREDENTIALS
-@app.route('/MessagingAppP1/user/<int:uid>/credentials')
-def getCredentialsByUserId(uid):
-    return CredentialsHandler().getCredentialsByUserId(uid)
+
+#Does not exist in table Credentials                       #
+@app.route('/MessagingAppP1/user/<int:uid>/credentials')   #
+def getCredentialsByUserId(uid):                           #
+    return CredentialsHandler().getCredentialsByUserId(uid)#
+############################################################
 
 @app.route('/MessagingAppP1/user/username/<string:username>/credentials')
 def getCredentialsByUsername(username):
     return CredentialsHandler().getCredentialsByUsername(username)
 
+
 @app.route('/MessagingAppP1/user/email/<string:email>/credentials')
 def getCredentialsByEmail(email):
     return CredentialsHandler().getCredentialsByEmail(email)
+
 
 #USER SENT MESSAGES
 @app.route('/MessagingAppP1/user/<int:sid>/messages')
@@ -116,6 +124,16 @@ def getAllCredentials():
 def getCredentialsById(cid):
     return CredentialsHandler().getCredentialsById(cid)
 
+#For sake of testing     ###########################################
+@app.route('/MessagingAppP1/credentials/cpass/<string:cpassword>') #
+def getCredentialsByPassword(cpassword):                           #
+    return CredentialsHandler().getCredentialsByPassword(cpassword)#
+                                                                   #
+@app.route('/MessagingAppP1/credentials/cemail/<string:cemail>')   #
+def getCredentialsByEmai(cemail):                                  #
+    return CredentialsHandler().getCredentialsByEmail(cemail)      #
+####################################################################
+
 
 ##################
 #   MESSAGES     #
@@ -134,17 +152,17 @@ def getAllMessages():
 def getMessageById(mid):
     return MessagesHandler().getMessageById(mid)
 
-@app.route('/MessagingAppP1/messages/date/<string:date>')
-def getMessageByDate(date):
-    return MessagesHandler().getMessageByDate(date)
+@app.route('/MessagingAppP1/messages/date/<string:mdate>')
+def getMessageByDate(mdate):
+    return MessagesHandler().getMessageByDate(mdate)
 
-@app.route('/MessagingAppP1/messages/time/<string:time>')
-def getMessageByTime(time):
-    return MessagesHandler().getMessageByTime(time)
+#@app.route('/MessagingAppP1/messages/time/<string:mtime>')
+#def getMessageByTime(mtime):
+#    return MessagesHandler().getMessageByTime(mtime)
 
-@app.route('/MessagingAppP1/messages/contains/<string:body>')
-def getMessageByBody(body):
-    return MessagesHandler().getMessageByBody(body)
+@app.route('/MessagingAppP1/messages/contains/<string:minfo>')
+def getMessageByInfo(minfo):
+    return MessagesHandler().getMessageByInfo(minfo)
 
 #MESSAGE REACTIONS
 @app.route('/MessagingAppP1/message/<int:mid>/reactions/')
@@ -185,15 +203,15 @@ def getAllGroups():
 def getGroupsById(gid):
    return GroupHandler().getGroupsById(gid)
 
-@app.route('/MessagingAppP1/groups/<string:gname>')
+@app.route('/MessagingAppP1/groups/gname/<string:gname>')
 def getGroupsByName(gname):
    return GroupHandler().getGroupsByName(gname)
 
-@app.route('/MessagingAppP1/groups/<string:gdesc>')
+@app.route('/MessagingAppP1/groups/gdesc/<string:gdesc>')
 def getGroupsByDescription(gdesc):
    return GroupHandler().getGroupByDescription(gdesc)
 
-@app.route('/MessagingAppP1/groups/<string:gcreation>')
+@app.route('/MessagingAppP1/groups/gcreation/<string:gcreation>')
 def getGroupByCreation(gcreation):
    return GroupHandler().getGroupByCreation(gcreation)
 
@@ -221,6 +239,7 @@ def getAllReactions():
        return handler.getAllReactions()
 
 #SEARCH REACTION BY ATTRIBUTE
+#Posible Removal
 @app.route('/MessagingAppP1/reactions/<int:rid>')
 def getAllReactionsById(rid):
    return ReactionHandler().getAllReactionsById(rid)
@@ -255,6 +274,7 @@ def getPinById(pid):
 def getAllAdmin():
     return AdminHandler().getAllAdmin()
 
+#Posible Removal
 @app.route('/MessagingAppP1/Admin/<int:aid>')
 def getAdminById(aid):
     return AdminHandler().getAdminById(aid)
@@ -271,6 +291,7 @@ def getAdminByUserId(uid):
 def getAllReceivedMessages():
     return ReceivedMsgHandler().getAllReceivedMsg()
 
+#Posible Removal
 @app.route('/MessagingAppP1/ReceivedMsgs/<int:id>')
 def getReceivedById(id):
     return ReceivedMsgHandler().getReceivedMsgById(id)
@@ -287,7 +308,7 @@ def getReceivedMsgByMessageId(mid):
 @app.route('/MessagingAppP1/PartOfGroup')
 def getAllIsPart():
     return IsPartHandler().getAllIsPart()
-
+#Posible Removal
 @app.route('/MessagingAppP1/PartOfGroup/<int:pid>')
 def getIsPartById(pid):
     return IsPartHandler().getIsPartById(pid)

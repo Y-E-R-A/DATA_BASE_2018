@@ -6,9 +6,9 @@ class ReplyHandler:
     #User dictionary
     def mapToDict(self, row):
         result = {}
-        result['pid'] = row[0]
-        result['mid'] = row[1]
-        result['rid'] = row[2]
+        result['mid'] = row[0]
+        result['rid'] = row[1]
+        #result['rid'] = row[2]
         return result
 
     def getAllReply(self):

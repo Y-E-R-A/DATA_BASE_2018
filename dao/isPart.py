@@ -12,7 +12,9 @@ class IsPartDAO:
         cursor = self.conn.cursor()
         query = "select * from IsPart;"
         cursor.execute(query)
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
 
         return result
 
@@ -20,7 +22,9 @@ class IsPartDAO:
         cursor = self.conn.cursor()
         query = "select * from IsPart where mid = %s;"
         cursor.execute(query, (id,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
 

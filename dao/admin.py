@@ -35,7 +35,9 @@ class AdminDAO:
         cursor = self.conn.cursor()
         query = "select * from Administrate where uid = %s;"
         cursor.execute(query, (uid,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def getAdminByGroupId(self, gid):

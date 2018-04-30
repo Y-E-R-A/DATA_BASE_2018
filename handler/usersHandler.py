@@ -7,10 +7,11 @@ class UsersHandler:
     def mapToUserDict(self, row):
         result = {}
         result['uid'] = row[0]
-        result['name'] = row[1]
-        result['lastname'] = row[2]
-        result['phone'] = row[3]
-        result['aboutme'] = row[4]
+        result['cid'] = row[1]
+        result['firstname'] = row[2]
+        result['lastname'] = row[3]
+        result['phone'] = row[4]
+        result['description'] = row[5]
         return result
 
 
@@ -66,3 +67,19 @@ class UsersHandler:
             mapped_result = self.mapToUserDict(result)
             return jsonify(User=mapped_result)
 
+    def getUserByDescription(self, udescription):
+        # The first user with 'phone' will be the mapped result
+        result = UserDAO().getUserByDescription(udescription)
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            mapped_result = self.mapToUserDict(result)
+            return jsonify(User=mapped_result)
+
+    #def insert(self, uid, cid, ufirst_name, ulast_name,phone,udescription):
+        #cursor = self.conn.cursor()
+        #query = "insert into Users(uid, cid, ufirst_name, ulast_name,phone,udescription) values (%s, %s, %s, %s, %s, %s) returning uid;"
+        #cursor.execute(query, (uid, cid, ufirst_name, ulast_name,phone,udescription))
+        #sid = cursor.fetchone()[0]
+        #self.conn.commit()
+        #return sid

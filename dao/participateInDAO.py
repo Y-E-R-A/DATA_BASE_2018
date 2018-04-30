@@ -21,7 +21,7 @@ class PinDAO:
     def getPinById(self, id):
         cursor = self.conn.cursor()
         query = "select * from Participates where id = %s;"
-        cursor.execute(query, (id))
+        cursor.execute(query, (id,))
         result = []
         for row in cursor:
             result.append(row)
@@ -30,7 +30,7 @@ class PinDAO:
     def getPinByUserId(self, uid):
         cursor = self.conn.cursor()
         query = "select * from Participates where uid = %s;"
-        cursor.execute(query, (uid))
+        cursor.execute(query, (uid,))
         result = []
         for row in cursor:
             result.append(row)
@@ -39,7 +39,7 @@ class PinDAO:
     def getPinByGroupId(self, gid):
         cursor = self.conn.cursor()
         query = "select * from Participates where gid = %s;"
-        cursor.execute(query, (gid))
+        cursor.execute(query, (gid,))
         result = []
         for row in cursor:
             result.append(row)
