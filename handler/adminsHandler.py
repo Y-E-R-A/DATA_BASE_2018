@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from dao.admin import AdminDAO
+from dao.adminDAO import AdminDAO
 
 class AdminHandler:
 

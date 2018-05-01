@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from dao.isPart import IsPartDAO
+from dao.isPartDAO import IsPartDAO
 
 class IsPartHandler:
 

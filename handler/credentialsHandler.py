@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from dao.credential import CredentialsDAO
+from dao.credentialDAO import CredentialsDAO
 
 class CredentialsHandler:
 

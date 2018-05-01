@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from dao.receivedMsg import ReceivedMsgDAO
+from dao.receivedMsgDAO import ReceivedMsgDAO
 
 class ReceivedMsgHandler:
 

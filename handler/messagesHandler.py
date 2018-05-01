@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from dao.message import messageDAO
+from dao.messageDAO import messageDAO
 
 class MessagesHandler:
 
@@ -68,3 +68,19 @@ class MessagesHandler:
                 mapped_result.append(self.mapToMsgDict(r))
 
             return jsonify(Messages=mapped_result)
+
+    def insert(self, form):
+        if len(form) != 4:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            pname = form['pname']
+            pprice = form['pprice']
+            pmaterial = form['pmaterial']
+            pcolor = form['pcolor']
+            if pcolor and pprice and pmaterial and pname:
+                dao = PartsDAO()
+                pid = dao.insert(pname, pcolor, pmaterial, pprice)
+                result = self.build_part_attributes(pid, pname, pcolor, pmaterial, pprice)
+                return jsonify(Part=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400

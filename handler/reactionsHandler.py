@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from dao.reaction import ReactionDAO
+from dao.reactionDAO import ReactionDAO
 
 class ReactionHandler:
     def mapToDict(self, row):

@@ -31,7 +31,7 @@ class ContactsDAO:
                 " Users.ulast_name AS Contact_lastname, Credentials.cemail, Users.phone From (Contacts " \
                 "inner join Users ON Contacts.cid = Users.uid) inner join Credentials ON Users.cid = Credentials.cid " \
                 "Where Contacts.uid = %s AND Contacts.cid= %s;"
-        cursor.execute(query, uid, (cid,))
+        cursor.execute(query, (uid, cid,))
         result = []
         for row in cursor:
             result.append(row)

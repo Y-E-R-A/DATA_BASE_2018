@@ -396,9 +396,9 @@ def getUserContacts(uid):
    return ContactsHandler().getUserContacts(uid)
 
 
-#@app.route('/MessagingAppP1/user/<int:uid>/contact/<int:cid>')
-#def getUserContactById(uid, cid):
-#   return ContactsHandler().getUserContactsById(uid, cid)
+@app.route('/MessagingAppP1/user/<int:uid>/contact/<int:cid>')
+def getUserContactById(uid, cid):
+   return ContactsHandler().getUserContactsById(uid, cid)
 
 if __name__ == '__main__':
     app.run()

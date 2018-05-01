@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from dao.media import mediaDAO
+from dao.mediaDAO import mediaDAO
 
 class MediaHandler:
     def mapToDict(self, row):
