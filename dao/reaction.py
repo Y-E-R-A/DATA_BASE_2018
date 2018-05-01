@@ -36,6 +36,50 @@ class ReactionDAO:
             result.append(row)
         return result
 
+    def getLikesOfMessageById(self, mid):
+        cursor = self.conn.cursor()
+        query = "SELECT Messages.mid, Messages.minfo, count(*) from MESSAGES INNER JOIN REACTION ON " \
+                "MESSAGES.MID= REACTION.MID GROUP BY Messages.mid, Reaction.Rating HAVING " \
+                "Reaction.Rating='like' AND Messages.mid = %s;"
+        cursor.execute(query, (mid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getPeopleWhoLikesMessageId(self, mid):
+        cursor = self.conn.cursor()
+        query = "SELECT Messages.mid, Messages.minfo, Users.uid from (MESSAGES INNER JOIN REACTION ON" \
+                " Messages.mid= reaction.mid)  INNER JOIN USERS ON Reaction.uid= Users.uid WHERE " \
+                "Reaction.Rating='like' AND Messages.mid = %s;"
+        cursor.execute(query, (mid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getDislikesByMessageId(self, mid):
+        cursor = self.conn.cursor()
+        query = "SELECT Messages.mid, Messages.minfo, count(*) from MESSAGES INNER JOIN REACTION ON  " \
+                "Messages.mid= reaction.mid GROUP BY Messages.mid, Reaction.Rating Having " \
+                "Reaction.Rating='dislike' AND Messages.mid = %s;"
+        cursor.execute(query, (mid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getPeopleWhoDislikesMessageId(self, mid):
+        cursor = self.conn.cursor()
+        query = "SELECT Messages.mid, Messages.minfo, Users.uid from (MESSAGES INNER JOIN REACTION ON" \
+                " Messages.mid= reaction.mid)  INNER JOIN USERS ON Reaction.uid= Users.uid WHERE " \
+                "Reaction.Rating='dislike' AND Messages.mid = %s;"
+        cursor.execute(query, (mid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def getByUserId(self, uid):
         cursor = self.conn.cursor()
         query = "select * from Reaction where uid = %s;"

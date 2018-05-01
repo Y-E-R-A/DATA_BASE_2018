@@ -11,9 +11,14 @@ class GroupHandler:
         result['gdesc'] = row[2]
         result['gcreation'] = row[3]
         result['uid'] = row[4]
-
         return result
 
+    def mapGroupMessagesToDict(self, row):
+        result = {}
+        result['gname'] = row[0]
+        result['minfo'] = row[1]
+        result['uid'] = row[2]
+        return result
 
     def getAllGroups(self):
         dao = groupDAO()
@@ -80,4 +85,15 @@ class GroupHandler:
                 mapped_result.append(self.mapToDict(r))
             return jsonify(Group =mapped_result)
 
+    def getMessagesByGroupId(self, uid):
+
+        dao = groupDAO()
+        result = dao.getMessagesByGroupId(uid)
+        mapped_result = []
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            for r in result:
+                mapped_result.append(self.mapGroupMessagesToDict(r))
+            return jsonify(GroupMessages =mapped_result)
 

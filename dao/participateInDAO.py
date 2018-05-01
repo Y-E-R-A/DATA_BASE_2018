@@ -46,3 +46,13 @@ class PinDAO:
         return result
 
 
+    def getPinNamesByGroupId(self, gid):
+        cursor = self.conn.cursor()
+        query = "Select uid, ufirst_name, ulast_name " \
+                "From Participates natural inner join Users " \
+                "Where gid = %s;"
+        cursor.execute(query, (gid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

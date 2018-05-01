@@ -62,3 +62,21 @@ class UserDAO:
         result = cursor.fetchone()
         return result
 
+    def getUserGroupsById(self, uid):
+        cursor = self.conn.cursor()
+        query = "select * from Participates natural join Groups where uid = %s;"
+        cursor.execute(query, (uid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getUserInformationByUserId(self, uid):
+        cursor = self.conn.cursor()
+        query = "SELECT cid, uid, ufirst_name, ulast_name, phone, udescription, cusername, cemail " \
+                "from Users NATURAL INNER JOIN Credentials Where Users.uid = %s;"
+        cursor.execute(query, (uid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

@@ -8,7 +8,13 @@ class ParticipationHandler:
         result = {}
         result['uid'] = row[0]
         result['gid'] = row[1]
-        #result['gid'] = row[2]
+
+        return result
+    def mapToParticipantsListDict(self, row):
+        result = {}
+        result['uid'] = row[0]
+        result['firstname'] = row[1]
+        result['lastname'] = row[2]
         return result
 
     def getAllParticipants(self):
@@ -48,4 +54,15 @@ class ParticipationHandler:
         else:
             for r in result:
                 mapped_result.append(self.mapToDict(r))
-            return jsonify(ParticipateInRelation=mapped_result)
+            return jsonify(ParticipateInGroup=mapped_result)
+
+    def getParticipantsNameByGroupId(self, id):
+        dao = PinDAO()
+        result = dao.getPinNamesByGroupId(id)
+        mapped_result = []
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            for r in result:
+                mapped_result.append(self.mapToParticipantsListDict(r))
+            return jsonify(ParticipateInGroup=mapped_result)

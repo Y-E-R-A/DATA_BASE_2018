@@ -12,9 +12,10 @@
 # used for messaging in a social context.   #
 #############################################
 
-
+#from flask.cors import Cors.cross_origin
 from flask import Flask, request
 from handler.adminsHandler import AdminHandler
+from handler.contactsHandler import ContactsHandler
 from handler.credentialsHandler import CredentialsHandler
 from handler.groupHandler import GroupHandler
 from handler.isPartHandler import IsPartHandler
@@ -79,21 +80,13 @@ def getReactionByUserId(uid):
 
 #USER CREDENTIALS
 
-#Does not exist in table Credentials                       #
-@app.route('/MessagingAppP1/user/<int:uid>/credentials')   #
-def getCredentialsByUserId(uid):                           #
-    return CredentialsHandler().getCredentialsByUserId(uid)#
-############################################################
-
 @app.route('/MessagingAppP1/user/username/<string:username>/credentials')
 def getCredentialsByUsername(username):
     return CredentialsHandler().getCredentialsByUsername(username)
 
-
 @app.route('/MessagingAppP1/user/email/<string:email>/credentials')
 def getCredentialsByEmail(email):
     return CredentialsHandler().getCredentialsByEmail(email)
-
 
 #USER SENT MESSAGES
 @app.route('/MessagingAppP1/user/<int:sid>/messages')
@@ -108,7 +101,12 @@ def getReceivedMsgByUserId(uid):
 #USER GROUPS
 @app.route('/MessagingAppP1/user/<int:uid>/groups')
 def getUserGroups(uid):
-   return GroupHandler().getByUserId(uid)
+   return UsersHandler().getUserGroupsByUserId(uid)
+
+#USER PERSONAL INFORMATION
+@app.route('/MessagingAppP1/user/<int:uid>/info')
+def getUserInfo(uid):
+   return UsersHandler().getUserInformation(uid)
 
 
 ##################
@@ -165,9 +163,29 @@ def getMessageByInfo(minfo):
     return MessagesHandler().getMessageByInfo(minfo)
 
 #MESSAGE REACTIONS
-@app.route('/MessagingAppP1/message/<int:mid>/reactions/')
+@app.route('/MessagingAppP1/message/<int:mid>/reactions')
 def getReactionByMessageId(mid):
    return ReactionHandler().getByMessageId(mid)
+
+#A MESSAGE LIKES
+@app.route('/MessagingAppP1/message/<int:mid>/likes/')
+def getLikesByMessageId(mid):
+    return ReactionHandler().getLikesByMessageId(mid)
+
+#PEOPLE WHO LIKE A MESSAGE
+@app.route('/MessagingAppP1/message/<int:mid>/wholikes')
+def getMessageLikesPeopleList(mid):
+   return ReactionHandler().getMessageLikesPeopleList(mid)
+
+#A MESSAGE DISLIKES
+@app.route('/MessagingAppP1/message/<int:mid>/dislikes/')
+def getDislikesByMessageId(mid):
+   return ReactionHandler().getDislikesByMessageId(mid)
+
+#PEOPLE WHO DISLIKE A MESSAGE
+@app.route('/MessagingAppP1/message/<int:mid>/whodislikes')
+def getMessageDislikesPeopleList(mid):
+   return ReactionHandler().getMessageDislikesPeopleList(mid)
 
 #MESSAGE MEDIA
 @app.route('/MessagingAppP1/message/<int:mid>/media')
@@ -215,16 +233,25 @@ def getGroupsByDescription(gdesc):
 def getGroupByCreation(gcreation):
    return GroupHandler().getGroupByCreation(gcreation)
 
-#GROUP PARTICIPANTS
+#GROUP PARTICIPANTS IDS
 @app.route('/MessagingAppP1/group/<int:gid>/GroupParticipants')
 def getPinByGroupId(gid):
     return ParticipationHandler().getParticipantsByGroupId(gid)
+
+#GROUP PARTICIPANTS NAMES
+@app.route('/MessagingAppP1/group/<int:gid>/Participants')
+def getPinNamesByGroupId(gid):
+    return ParticipationHandler().getParticipantsNameByGroupId(gid)
 
 #GROUP ADMIN
 @app.route('/MessagingAppP1/group/<int:gid>/Admin')
 def getAdminByGroupId(gid):
     return AdminHandler().getAdminByGroupId(gid)
 
+#GROUP MESSAGES
+@app.route('/MessagingAppP1/group/<int:gid>/messages')
+def getMessagesByGroupId(gid):
+    return GroupHandler().getMessagesByGroupId(gid)
 
 ######################
 #     Reaction       #
@@ -260,11 +287,6 @@ def getAllPinRelation():
 @app.route('/MessagingAppP1/GroupParticipants/<int:pid>')
 def getPinById(pid):
     return ParticipationHandler().getParticipantsByPId(pid)
-
-#TODO Es lo mismo que buscar todos los grupos de un usuario??????
-#@app.route('/MessagingAppP1/GroupsParticipants/<int:uid>')
-#def getPinByUserId(uid):
-#    return PinHandler().getPinByUserId(uid)
 
 
 ##################
@@ -366,6 +388,17 @@ def getMediaByType(metype):
    return MediaHandler().getMediaByType(metype)
 
 
+###################
+#     CONTACTS    #
+###################
+@app.route('/MessagingAppP1/user/<int:uid>/contacts')
+def getUserContacts(uid):
+   return ContactsHandler().getUserContacts(uid)
+
+
+#@app.route('/MessagingAppP1/user/<int:uid>/contact/<int:cid>')
+#def getUserContactById(uid, cid):
+#   return ContactsHandler().getUserContactsById(uid, cid)
 
 if __name__ == '__main__':
     app.run()

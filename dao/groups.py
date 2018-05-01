@@ -65,5 +65,14 @@ class groupDAO:
             result.append(row)
         return result
 
-
+    def getMessagesByGroupId(self, uid):
+        cursor = self.conn.cursor()
+        query = "Select gname, minfo, Messages.uid From (Messages INNER JOIN isPart " \
+                "ON Messages.mid = isPart.mid) INNER JOIN Groups ON Groups.gid = isPart.gid" \
+                " Where Groups.gid= %s;"
+        cursor.execute(query, (uid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
