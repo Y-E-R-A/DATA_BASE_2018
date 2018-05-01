@@ -24,6 +24,13 @@ class ReactionHandler:
         result['userid'] = row[2]
         return result
 
+    def build_Reaction_attributes(self, mid, uid, rating):
+        result = {}
+        result['mid'] = mid
+        result['uid'] = uid
+        result['rating'] = rating
+        return result
+
     def getAllReactions(self):
         dao = ReactionDAO()
         result = dao.getAllReactions()
@@ -119,5 +126,38 @@ class ReactionHandler:
             return jsonify(Reaction=mapped_result)
 
 
+    def insert(self, form):
+        if len(form) != 4:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            mid = form['mid']
+            uid = form['uid']
+            rating = form['rating']
+            if mid and uid and rating:
+                dao = ReactionDAO()
+                rid = dao.insert(mid, uid, rating)
+                result = self.build_messages_attributes(mid, mdate, minfo, uid)
+                return jsonify(Message=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+    def updateMessages(self, uid, form):
+        dao = ReactionDAO()
+        if not dao.getAllReactions(uid):
+            return jsonify(Error="User not found."), 404
+        else:
+            if len(form) != 4:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                mid = form['mid']
+                mdate = form['mdate']
+                minfo = form['minfo']
+                uid = form['uid']
+                if mid and mdate and minfo and uid:
+                    dao.update(mid, mdate, minfo, uid)
+                    result = self.build_messages_attributes(mid, mdate, minfo, uid)
+                    return jsonify(Message=result), 201
+                else:
+                    return jsonify(Error="Unexpected attributes in update request"), 400
 
 

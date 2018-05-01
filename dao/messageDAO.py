@@ -56,10 +56,26 @@ class messageDAO:
             result.append(row)
         return result
 
+
+
+
+
+
+
+
+
     def insert(self, mdate, minfo, uid):
         cursor = self.conn.cursor()
-        query = "insert into messages(mid, mdate, minfo, uid) values (%s, %s, %s, %s) returning mid;"
+        query = "insert into messages(mdate, minfo, uid) values (%s, %s, %s) returning mid;"
         cursor.execute(query, (mdate, minfo, uid,))
         mid = cursor.fetchone()[0]
         self.conn.commit()
         return mid
+
+    def update(self, uid, mdate, minfo, mid):
+        cursor = self.conn.cursor()
+        query = "update messages set uid = %s, mdate = %s, minfo = %s where mid = %s;"
+        cursor.execute(query, (mid, mdate, minfo, uid,))
+        self.conn.commit()
+        return mid
+

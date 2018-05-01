@@ -12,6 +12,13 @@ class MessagesHandler:
         result['uid']= row[3]
         return result
 
+    def build_messages_attributes(self, mid, mdate, minfo, uid):
+        result = {}
+        result['mid'] = mid
+        result['mdate'] = mdate
+        result['minfo'] = minfo
+        result['uid'] = uid
+        return result
 
     def getAllMessages(self):
         result = messageDAO().getAllMessages()
@@ -73,14 +80,32 @@ class MessagesHandler:
         if len(form) != 4:
             return jsonify(Error="Malformed post request"), 400
         else:
-            pname = form['pname']
-            pprice = form['pprice']
-            pmaterial = form['pmaterial']
-            pcolor = form['pcolor']
-            if pcolor and pprice and pmaterial and pname:
-                dao = PartsDAO()
-                pid = dao.insert(pname, pcolor, pmaterial, pprice)
-                result = self.build_part_attributes(pid, pname, pcolor, pmaterial, pprice)
-                return jsonify(Part=result), 201
+            mdate = form['mdate']
+            minfo = form['minfo']
+            uid = form['uid']
+            if mdate and minfo and uid:
+                dao = messageDAO()
+                mid = dao.insert(mdate, minfo, uid)
+                result = self.build_messages_attributes(mid, mdate, minfo, uid)
+                return jsonify(Message=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
+
+    def updateMessages(self, uid, form):
+        dao = messageDAO()
+        if not dao.getAllMessageByUserId(uid):
+            return jsonify(Error="User not found."), 404
+        else:
+            if len(form) != 4:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                mid = form['mid']
+                mdate = form['mdate']
+                minfo = form['minfo']
+                uid = form['uid']
+                if mid and mdate and minfo and uid:
+                    dao.update(mid, mdate, minfo, uid)
+                    result = self.build_messages_attributes(mid, mdate, minfo, uid)
+                    return jsonify(Message=result), 201
+                else:
+                    return jsonify(Error="Unexpected attributes in update request"), 400

@@ -5,14 +5,13 @@
 #   Abdias Santiago Lugo                    #
 #                                           #
 # Date: 3/28/2018                           #
-# Updated: 4/21/2018                        #
+# Updated: 5/1/2018                         #
 # Distribution: phyton 3.6                  #
 #                                           #
 # This project P1 implements an application #
 # used for messaging in a social context.   #
 #############################################
-
-#from flask.cors import Cors.cross_origin
+from flask_cors import CORS, cross_origin
 from flask import Flask, request
 from handler.adminsHandler import AdminHandler
 from handler.contactsHandler import ContactsHandler
@@ -28,6 +27,9 @@ from handler.usersHandler import UsersHandler
 from handler.receivedMsgsHandler import ReceivedMsgHandler
 
 app = Flask(__name__)
+
+# Apply CORS to this app
+CORS(app)
 
 
 @app.route('/')
