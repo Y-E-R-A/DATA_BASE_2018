@@ -4,12 +4,11 @@ from dao.reactionDAO import ReactionDAO
 class ReactionHandler:
     def mapToDict(self, row):
         result = {}
-        #result['rid'] = row[0]
         result['mid'] = row[0]
         result['uid'] = row[1]
         result['rating'] = row[2]
-
         return result
+
     def mapToMessageReactionDict(self, row):
         result = {}
         result['mid'] = row[0]
@@ -24,6 +23,7 @@ class ReactionHandler:
         result['userid'] = row[2]
         result['ufirstname'] = row[3]
         result['ulastname'] = row[4]
+        result['rating'] = row[5]
         return result
 
     def build_Reaction_attributes(self, mid, uid, rating):
@@ -102,7 +102,7 @@ class ReactionHandler:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
-                mapped_result.append(self.mapToDict(r))
+                mapped_result.append(self.mapMessageReactionToPeopleDict(r))
             return jsonify(Reaction=mapped_result)
 
     def getByUserId(self, uid):

@@ -29,7 +29,9 @@ class ReactionDAO:
 
     def getByMessageID(self, mid):
         cursor = self.conn.cursor()
-        query = "select * from Reaction where mid = %s;"
+        query = "Select Messages.mid, Messages.minfo, Users.uid, Users.ufirst_name, Users.ulast_name, Reaction.rating " \
+                "From (Messages inner join Reaction ON messages.mid= Reaction.mid) inner join Users " \
+                "ON Reaction.uid = Users.uid Where Messages.mid = %s;"
         cursor.execute(query, (mid,))
         result = []
         for row in cursor:
@@ -49,7 +51,7 @@ class ReactionDAO:
 
     def getPeopleWhoLikesMessageId(self, mid):
         cursor = self.conn.cursor()
-        query = "SELECT Messages.mid, Messages.minfo, Users.uid, Users.ufirst_name, Users.ulast_name from (MESSAGES INNER JOIN REACTION ON" \
+        query = "SELECT Messages.mid, Messages.minfo, Users.uid, Users.ufirst_name, Users.ulast_name, Reaction.rating from (MESSAGES INNER JOIN REACTION ON" \
                 " Messages.mid= reaction.mid)  INNER JOIN USERS ON Reaction.uid= Users.uid WHERE " \
                 "Reaction.Rating='like' AND Messages.mid = %s;"
         cursor.execute(query, (mid,))
@@ -71,7 +73,7 @@ class ReactionDAO:
 
     def getPeopleWhoDislikesMessageId(self, mid):
         cursor = self.conn.cursor()
-        query = "SELECT Messages.mid, Messages.minfo, Users.uid, Users.ufirst_name, Users.ulast_name from (MESSAGES INNER JOIN REACTION ON" \
+        query = "SELECT Messages.mid, Messages.minfo, Users.uid, Users.ufirst_name, Users.ulast_name, Reaction.rating from (MESSAGES INNER JOIN REACTION ON" \
                 " Messages.mid= reaction.mid)  INNER JOIN USERS ON Reaction.uid= Users.uid WHERE " \
                 "Reaction.Rating='dislike' AND Messages.mid = %s;"
         cursor.execute(query, (mid,))
@@ -104,7 +106,7 @@ class ReactionDAO:
 
 
 
-    def insert(self, mid, uid, rating):
+    def insert(self, mid, uid,rating):
         cursor = self.conn.cursor()
         query = "insert into Reaction(mid, uid, rating) values (%s, %s, %s) returning rid;"
         cursor.execute(query, (mid, uid, rating,))
