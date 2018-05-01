@@ -22,6 +22,8 @@ class ReactionHandler:
         result['mid'] = row[0]
         result['minfo'] = row[1]
         result['userid'] = row[2]
+        result['ufirstname'] = row[3]
+        result['ulastname'] = row[4]
         return result
 
     def build_Reaction_attributes(self, mid, uid, rating):

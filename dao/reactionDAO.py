@@ -49,7 +49,7 @@ class ReactionDAO:
 
     def getPeopleWhoLikesMessageId(self, mid):
         cursor = self.conn.cursor()
-        query = "SELECT Messages.mid, Messages.minfo, Users.uid from (MESSAGES INNER JOIN REACTION ON" \
+        query = "SELECT Messages.mid, Messages.minfo, Users.uid, Users.ufirst_name, Users.ulast_name from (MESSAGES INNER JOIN REACTION ON" \
                 " Messages.mid= reaction.mid)  INNER JOIN USERS ON Reaction.uid= Users.uid WHERE " \
                 "Reaction.Rating='like' AND Messages.mid = %s;"
         cursor.execute(query, (mid,))
@@ -71,7 +71,7 @@ class ReactionDAO:
 
     def getPeopleWhoDislikesMessageId(self, mid):
         cursor = self.conn.cursor()
-        query = "SELECT Messages.mid, Messages.minfo, Users.uid from (MESSAGES INNER JOIN REACTION ON" \
+        query = "SELECT Messages.mid, Messages.minfo, Users.uid, Users.ufirst_name, Users.ulast_name from (MESSAGES INNER JOIN REACTION ON" \
                 " Messages.mid= reaction.mid)  INNER JOIN USERS ON Reaction.uid= Users.uid WHERE " \
                 "Reaction.Rating='dislike' AND Messages.mid = %s;"
         cursor.execute(query, (mid,))
