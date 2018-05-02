@@ -80,3 +80,29 @@ class UserDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def getUserMessages(self):
+        cursor = self.conn.cursor()
+        query = "select D.uid,D.mid,D.ufirst_name,D.ulast_name,D.minfo,D.mdate, D.likes, C.dislikes " \
+                "from(select A.uid,A.mid,A.ufirst_name,A.ulast_name,A.minfo,A.mdate, B.likes " \
+                "from(select u.uid,m.mid,u.ufirst_name,u.ulast_name,m.minfo,m.mdate " \
+                "from users as u, messages as m " \
+                "where u.uid=m.uid) as A left join (" \
+                "select m.mid,count(*) as likes " \
+                "from messages as m, reaction as r " \
+                "where r.rating='like' " \
+                "and m.mid=r.mid " \
+                "group by m.mid " \
+                ") as B on A.mid=B.mid " \
+                ") as D left join (" \
+                "select m.mid,count(*) as dislikes " \
+                "from messages as m, reaction as r " \
+                "where r.rating='dislike' " \
+                "and m.mid=r.mid " \
+                "group by m.mid) as C on C.mid=D.mid " \
+                "order by D.mdate"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

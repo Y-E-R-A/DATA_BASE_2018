@@ -126,3 +126,27 @@ class UsersHandler:
         #sid = cursor.fetchone()[0]
         #self.conn.commit()
         #return sid
+
+    def mapToUserDict(self, row):
+        result = {}
+        result['uid'] = row[0]
+        result['mid'] = row[1]
+        result['uName'] = row[2]
+        result['uLame'] = row[3]
+        result['mInfo'] = row[4]
+        result['mDate'] = row[5]
+        result['like'] = row[6]
+        result['dislike'] = row[7]
+        return result
+
+    def getUserMessages(self):
+        result = UserDAO().getUserMessages()
+        mapped_result = []
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            for r in result:
+                mapped_result.append(self.mapToUserDict(r))
+
+            return jsonify(User=mapped_result)
+

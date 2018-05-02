@@ -40,6 +40,12 @@ def home():
 def login():
     return "No Login for you!!!"
 
+@app.route('/MessagingAppP1/UserMessages')
+def getUsersMessages():
+   if request.args:
+       return UsersHandler.getUserMessages(request.args)
+   else:
+       return UsersHandler().getUserMessages()
 
 ##################
 #      USER      #
