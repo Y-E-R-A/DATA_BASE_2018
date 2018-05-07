@@ -1,5 +1,5 @@
-angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope',
-    function($http, $log, $scope) {
+angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope','$location',
+    function($http, $log, $scope, $location) {
         var thisCtrl = this;
         $scope.nowdate = Date();
         
@@ -60,6 +60,9 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
             var nextId = thisCtrl.counter++;
             thisCtrl.messageList.unshift({"uid": 1, "mid": nextId, "uName": "you", "mInfo": msg, "mDate": fecha, "like" : 0, "dislike" : 0});
             thisCtrl.newText = "";
+        };
+        this.messageRating = function (mid) {
+            $location.url('/messagerating/' + mid);
         };
 
         this.loadMessages();

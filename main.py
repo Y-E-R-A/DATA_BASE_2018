@@ -175,6 +175,11 @@ def getMessageByInfo(minfo):
 def getReactionByMessageId(mid):
    return ReactionHandler().getByMessageId(mid)
 
+#PEOPLE WHO RATED A MESSAGE
+@app.route('/MessagingAppP1/message/<int:mid>/users/')
+def getPeopleWhoRatedMessageList(mid):
+    return ReactionHandler().getPeopleWhoRatedMessageList(mid)
+
 #A MESSAGE LIKES
 @app.route('/MessagingAppP1/message/<int:mid>/likes/')
 def getLikesByMessageId(mid):

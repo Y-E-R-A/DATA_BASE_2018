@@ -11,6 +11,10 @@
             templateUrl: 'pages/chat.html',
             controller: 'ChatController',
             controllerAs : 'chatCtrl'
+        }).when('/messagerating/:mid', {
+            templateUrl: 'pages/messagerating.html',
+            controller: 'MessageRatingController',
+            controllerAs : 'messageRatingCtrl'
         }).otherwise({
             redirectTo: '/chat'
         });
