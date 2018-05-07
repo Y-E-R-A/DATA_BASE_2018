@@ -127,7 +127,7 @@ class UsersHandler:
         #self.conn.commit()
         #return sid
 
-    def mapToUserDict(self, row):
+    def mapToUserMessageDict(self, row):
         result = {}
         result['uid'] = row[0]
         result['mid'] = row[1]
@@ -146,7 +146,7 @@ class UsersHandler:
             return jsonify(Error="NOT FOUND"), 404
         else:
             for r in result:
-                mapped_result.append(self.mapToUserDict(r))
+                mapped_result.append(self.mapToUserMessageDict(r))
 
             return jsonify(User=mapped_result)
 

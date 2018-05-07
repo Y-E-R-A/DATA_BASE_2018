@@ -26,6 +26,13 @@ class ReactionHandler:
         result['rating'] = row[5]
         return result
 
+    def mapToMessageReactionFromPeopleDict(self, row):
+        result = {}
+        result['firstname'] = row[0]
+        result['lastname'] = row[1]
+        result['rating'] = row[2]
+        return result
+
     def build_Reaction_attributes(self, mid, uid, rating):
         result = {}
         result['mid'] = mid
@@ -73,9 +80,18 @@ class ReactionHandler:
                 mapped_result.append(self.mapMessageReactionToPeopleDict(r))
             return jsonify(Reaction=mapped_result)
 
+    def getPeopleWhoRatedMessageList(self, mid):
+        result = ReactionDAO().getPeopleWhoRateMessage(mid)
+        mapped_result = []
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            for r in result:
+                mapped_result.append(self.mapToMessageReactionFromPeopleDict(r))
+            return jsonify(Reaction=mapped_result)
+
     def getDislikesByMessageId(self, mid):
         result = ReactionDAO().getDislikesByMessageId(mid)
-        print(result)
         mapped_result = []
         if not result:
             return jsonify(Error="NOT FOUND"), 404

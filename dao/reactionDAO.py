@@ -60,6 +60,18 @@ class ReactionDAO:
             result.append(row)
         return result
 
+    def getPeopleWhoRateMessage(self, mid):
+        cursor = self.conn.cursor()
+        query = "Select Users.ufirst_name,Users.ulast_name, Reaction.rating from Users,Messages,Reaction " \
+                "where Users.uid= Reaction.uid " \
+                "and Messages.mid = Reaction.mid " \
+                "and Messages.mid = %s;"
+        cursor.execute(query, (mid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def getDislikesByMessageId(self, mid):
         cursor = self.conn.cursor()
         query = "SELECT Messages.mid, Messages.minfo, count(*) from MESSAGES INNER JOIN REACTION ON  " \
