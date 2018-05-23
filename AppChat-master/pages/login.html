@@ -1,0 +1,24 @@
+<div ng-cloak style="align-content: center">
+    {{nowdate}}
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content ">
+                        <span class="card-title"><font face = "verdana" size = "5">Log In</font></span>
+                                <p><label for="uname"> <b>Username or Email </b></label>
+                                <input type="text" placeholder="Enter Username" name="uname" required></p>
+                        
+                                <p>
+                                <label for="psw"><b>Password</b></label>
+                                <input type="password" placeholder="Enter Password" name="psw" required></p>
+                                    
+                               <div class="card-action">     
+                                    <p align="right"><a class="waves-effect  black lighten-1 btn-small" >Log In</a>                     
+                                    <a class="waves-effect  black lighten-1 btn-small" ng-click="loginCtrl.signUpRedirect()">Sign Up </a></p>
+                                    <a href="#/chat">Exit</a>
+                                   
+                </div>
+            </div>
+     </div>
+</div>
+   
