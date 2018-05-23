@@ -7,7 +7,6 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.counter  = 2;
         this.newText = "";
         
-        
         this.loadMessages = function(){
             // Get the list of parts from the servers via REST API
 
@@ -66,11 +65,8 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         };
         
         this.loginRedirect= function(){
-           //$location.url('http://127.0.0.1:34121/index.html#!/login');
             $location.url('/login');
         };
-        
-        
-        
+            
         this.loadMessages();
 }]);
