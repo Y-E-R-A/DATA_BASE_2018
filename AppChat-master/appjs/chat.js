@@ -64,6 +64,13 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.messageRating = function (mid) {
             $location.url('/messagerating/' + mid);
         };
-
+        
+        this.loginRedirect= function(){
+           //$location.url('http://127.0.0.1:34121/index.html#!/login');
+            $location.url('/login');
+        };
+        
+        
+        
         this.loadMessages();
 }]);

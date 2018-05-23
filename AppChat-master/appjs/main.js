@@ -1,12 +1,11 @@
 (function() {
 
     var app = angular.module('AppChat',['ngRoute']);
-
     app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider, $location) {
         $routeProvider.when('/login', {
             templateUrl: 'pages/login.html',
             controller: 'LoginController',
-            controllerAs : 'logingCtrl'
+            controllerAs : 'loginCtrl'
         }).when('/chat', {
             templateUrl: 'pages/chat.html',
             controller: 'ChatController',
@@ -15,9 +14,12 @@
             templateUrl: 'pages/messagerating.html',
             controller: 'MessageRatingController',
             controllerAs : 'messageRatingCtrl'
+        }).when('/signup', {
+            templateUrl: 'pages/signup.html',
+            controller: 'SignUpController',
+            controllerAs : 'signupCtrl'
         }).otherwise({
-            redirectTo: '/chat'
-        });
+            redirectTo: '/login'
+        })
     }]);
-
 })();

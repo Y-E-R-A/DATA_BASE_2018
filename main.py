@@ -170,7 +170,7 @@ def getMessageByDate(mdate):
 def getMessageByInfo(minfo):
     return MessagesHandler().getMessageByInfo(minfo)
 
-#MESSAGE REACTIONS
+#MESSAGE REACTIONS ******
 @app.route('/MessagingAppP1/message/<int:mid>/reactions')
 def getReactionByMessageId(mid):
    return ReactionHandler().getByMessageId(mid)
@@ -180,7 +180,7 @@ def getReactionByMessageId(mid):
 def getPeopleWhoRatedMessageList(mid):
     return ReactionHandler().getPeopleWhoRatedMessageList(mid)
 
-#A MESSAGE LIKES
+#A MESSAGE LIKES ***
 @app.route('/MessagingAppP1/message/<int:mid>/likes/')
 def getLikesByMessageId(mid):
     return ReactionHandler().getLikesByMessageId(mid)
@@ -404,11 +404,12 @@ def getMediaByType(metype):
 ###################
 #     CONTACTS    #
 ###################
+#All user contacts
 @app.route('/MessagingAppP1/user/<int:uid>/contacts')
 def getUserContacts(uid):
    return ContactsHandler().getUserContacts(uid)
 
-
+#A user's contact info
 @app.route('/MessagingAppP1/user/<int:uid>/contact/<int:cid>')
 def getUserContactById(uid, cid):
    return ContactsHandler().getUserContactsById(uid, cid)
