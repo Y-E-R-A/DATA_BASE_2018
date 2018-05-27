@@ -1,49 +1,84 @@
-  angular.module('AppChat').controller('SignUpController', ['$http', '$log', '$scope','$location',
-    function($http, $log, $scope, $location) {
+/**
+ * Created by manuel on 4/24/18.
+ */
+angular.module('AppChat').controller('SignUpController', ['$http', '$log', '$scope', '$location', '$routeParams',
+    function($http, $log, $scope, $location, $routeParams) {
+        // This variable lets you access this controller
+        // from within the callbacks of the $http object
+
         var thisCtrl = this;
-        $scope.nowdate = Date();
         
-        this.credentialsList = [];
-        this.counter  = 2;
-        this.username = "";
-        this.password ="";
+        var first_name = "";
         
+        var last_name = "";
         
-        this.loadMessages = function(){
-            // Get the list of parts from the servers via REST API
-
-            // First set up the url for the route
-            var url = "http://localhost:5000/MessagingAppP1/user"+username+"/credentials";
-            // Now set up the $http object
-            // It has two function call backs, one for success and one for error
-            $http.get(url).then(// success call back
-                function (response){
-                // The is the sucess function!
-                // Copy the list of parts in the data variable
-                // into the list of parts in the controller.
-
-                    console.log("response1: " + JSON.stringify(response));
+        var user_name = "";
+        
+        var password = "";
+        
+        var email = "";
+        
+        var phone = "";
+        
+        var description = "";
+            
+        var cid = 0;
+        // This variable hold the information on the part
+        // as read from the REST API
+        var credentialList = {};
+        
+        this.signUpUser = function(){
+            // Get the target part id from the parameter in the url
+            // using the $routerParams object
+            //var userId = $routeParams.uid;
+            console.log("Howdy")
+            var data = {};
+            
+            data.crid = this.cid;
+            
+            data.ufirst_name = this.first_name;
+            
+            data.ulast_name = this.last_name;  
+            
+            data.udescription = this.description;
+            
+            console.log("data: " + JSON.stringify(data));
+            
+            // Now create the url with the route to talk with the rest API
+            var reqURL = "http://localhost:5000/MessagingAppP1/user";
+            console.log("reqURL: " + reqURL);
+            var config = { headers : 
+                          {'Content-Type':'application/json;charset=utf-8;' }
+                         }
+        
+            // Now issue the http request to the rest API
+            $http.post(reqURL,data,config).then(
+                // Success function
+                function (response) {
+                    console.log("response: " + JSON.stringify(response.data))
+                    // assing the part details to the variable in the controller
+                    alert("New user added with id: " +response.data.User.uid);
+                    $location.url('/login');
                     
-                    thisCtrl.credentialsList = response.data.Credentials;
-
-                    console.log("credentialsList: " + JSON.stringify(thisCtrl.credentialsList));
-                }, // error callback
-                function (response){
+                }, //Error function
+                function (response) {
                     // This is the error function
                     // If we get here, some error occurred.
                     // Verify which was the cause and show an alert.
-                    console.log("response2: " + JSON.stringify(response));
                     var status = response.status;
-                    if (status == 0){
+                    console.log("thiscredentialList: " +JSON.stringify(thisCtrl.credentialsList));
+                    //console.log("Error: " + reqURL);
+                    //alert("Cristo");
+                    if (status == 0) {
                         alert("No hay conexion a Internet");
                     }
-                    else if (status == 401){
+                    else if (status == 401) {
                         alert("Su sesion expiro. Conectese de nuevo.");
                     }
-                    else if (status == 403){
+                    else if (status == 403) {
                         alert("No esta autorizado a usar el sistema.");
                     }
-                    else if (status == 404){
+                    else if (status == 404) {
                         alert("No se encontro la informacion solicitada.");
                     }
                     else {
@@ -51,10 +86,90 @@
                     }
                 }
             );
-            $log.error("Credentials Loaded: ", JSON.stringify(thisCtrl.credentialsList));
+        };
+        this.signUpCredentials = function(){
+            // Get the target part id from the parameter in the url
+            // using the $routerParams object
+            //var userId = $routeParams.uid;
+            
+            var data = {};
+        
+            //data.ufirst_name = this.first_name;
+            
+            //data.ulast_name = this.last_name;
+            
+            data.cuser_name = this.user_name;
+            
+            data.cpassword = this.password;
+            
+            data.cemail = this.email;
+            
+            data.cphone = this.phone;
+            
+            //data.udescription = this.description;
+            
+            console.log("data: " + JSON.stringify(data));
+            console.log("first name: "+this.first_name);
+            console.log("last name: "+this.last_name);
+            // Now create the url with the route to talk with the rest API
+            var reqURL = "http://localhost:5000/MessagingAppP1/credentials";
+            console.log("reqURL: " + reqURL);
+            var config = { headers : 
+                          {'Content-Type':'application/json;charset=utf-8;' }
+                         }
+        
+            // Now issue the http request to the rest API
+            $http.post(reqURL,data,config).then(
+                // Success function
+                function (response) {
+                    console.log("response: " + JSON.stringify(response.data))
+                    // assing the part details to the variable in the controller
+                    alert("New user added with id: " +response.data.User[0].cid);
+                    this.cid = response.data.User[0].cid
+                    console.log("cid "+this.cid )
+                    
+                    console.log("second sign in")
+                    this.signUpUser();
+                    
+                }, //Error function
+                function (response) {
+                    // This is the error function
+                    // If we get here, some error occurred.
+                    // Verify which was the cause and show an alert.
+                    var status = response.status;
+                    console.log("thiscredentialList: " +JSON.stringify(thisCtrl.credentialsList));
+                    //console.log("Error: " + reqURL);
+                    //alert("Cristo");
+                    if (status == 0) {
+                        alert("No hay conexion a Internet");
+                    }
+                    else if (status == 401) {
+                        alert("Su sesion expiro. Conectese de nuevo.");
+                    }
+                    else if (status == 403) {
+                        alert("No esta autorizado a usar el sistema.");
+                    }
+                    else if (status == 404) {
+                        alert("No se encontro la informacion solicitada.");
+                    }
+                    else {
+                        alert("Error interno del sistema.");
+                    }
+                }
+            );
+        };
+         
+        //this.loginUser();
+       // this.group = function (uid) {
+        //    $location.url('/group/' + uid);
+        //};
+        this.signUp = function(){
+            console.log('first credentials')
+            this.signUpCredentials();
+                
+            console.log("cid "+ this.cid)
+            console.log('second user')
+            //this.signUpUser();
         };
         
-         
-
-        this.signup();
 }]);

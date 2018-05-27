@@ -150,3 +150,22 @@ class UsersHandler:
 
             return jsonify(User=mapped_result)
 
+    def insertCredentialsJSON(self,json):
+        ufirst_name = json.get('ufirst_name')
+
+        ulast_name = json.get('ulast_name');
+
+        udescription = json.get('udescription');
+
+        if ufirst_name and ulast_name and udescription:
+            result = UserDAO().insert(ufirst_name,ulast_name,udescription)
+            mapped_result = []
+            if not result:
+                return jsonify(Error="NOT FOUND"), 404
+            else:
+                for r in result:
+                    mapped_result.append(self.mapToUserDict(r))
+                return jsonify(User=mapped_result), 201
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 404
+

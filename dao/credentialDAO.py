@@ -66,3 +66,26 @@ class CredentialsDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def getUserByCredentials(self, cpassword, cuser):
+        cursor = self.conn.cursor()
+        query = "Select * from Credentials, Users where Credentials.cid = Users.cid and cpassword = %s and (cusername = %s OR cemail = %s);"
+        cursor.execute(query, (cpassword, cuser, cuser, ))
+        result = []
+        for row in cursor:
+            result.append(row)
+        print (result)
+        return result
+
+    def insert(self,cuser_name,cpassword,cemail,cphone):
+        print ("CredentialDAO")
+        #insert
+        #into
+        #Credentials(cpassword, cusername, cemail)
+        #values('YERA1234', 'yomi', 'yomaira.rivera@gmail.edu')
+        dumy = [5, 'Mr', 'manny', 'g@mail']
+        table = []
+        table.append(dumy)
+        print (dumy)
+        print (table)
+        return table

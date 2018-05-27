@@ -27,7 +27,7 @@ class groupDAO:
             result.append(row)
         return result
 
-
+#Select Users.ufirst_name, Users.ulast_name from Users, Participates where Users.uid = Participates.uid and Participates.gid = 2
     def getGroupsByName(self, groupname):
         cursor = self.conn.cursor()
         query = "Select * from Groups where gname = %s;"

@@ -52,13 +52,17 @@ def getUsersMessages():
 # ################
 
 ##SEARCH ALL USERS
-@app.route('/MessagingAppP1/user')
+@app.route('/MessagingAppP1/user', methods = ['GET','POST'])
 def getAllUsers():
-    if request.args:
-        return UsersHandler.getAllUsers(request.args)
+    if request.method == 'POST':
+        print ("REQUEST", request.json)
+        return UsersHandler().insertCredentialsJSON(request.json)
     else:
-        handler = UsersHandler()
-        return handler.getAllUsers()
+        if request.args:
+            return UsersHandler.getAllUsers(request.args)
+        else:
+            handler = UsersHandler()
+            return handler.getAllUsers()
 
 #SEARCHING A USER BY ATRIBUTE
 @app.route('/MessagingAppP1/user/<int:uid>')
@@ -122,13 +126,32 @@ def getUserInfo(uid):
 # ################
 
 #GENERAL CREDENTIALS
-@app.route('/MessagingAppP1/credentials')
+@app.route('/MessagingAppP1/credentials', methods=['GET','POST'])
 def getAllCredentials():
-    return CredentialsHandler().getAllCredentials()
+    if request.method == 'POST':
+
+        print("REQUEST: ",request.json)
+        return CredentialsHandler().insertCredentialsJSON(request.json)
+    else:
+        return CredentialsHandler().getAllCredentials()
 
 @app.route('/MessagingAppP1/credentials/<int:cid>')
 def getCredentialsById(cid):
     return CredentialsHandler().getCredentialsById(cid)
+
+@app.route('/MessagingAppP1/credentials/user', methods=['GET','POST'])
+def getUserByCredentials():
+    if request.method == 'POST':
+
+        print (request.json)
+        print (request.args)
+        return CredentialsHandler().getUserByCredentials(request.json)
+    else:
+        print(request.json)
+        print("HERE")
+        print(request.args)
+        print(request.args.get('cuser'))
+        return CredentialsHandler().getUserByCredentials(request.args)
 
 #For sake of testing     ###########################################
 @app.route('/MessagingAppP1/credentials/cpass/<string:cpassword>') #
