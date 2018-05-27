@@ -21,6 +21,14 @@ class CredentialsHandler:
         result['uid'] = row[4]
         return result
 
+    def buildUserDict(self, cid,cuser_name,cpassword,cemail):
+        result = {}
+        result['cid'] = cid
+        result['password'] = cpassword
+        result['username'] = cuser_name
+        result['email'] = cemail
+        return result
+
     def getAllCredentials(self):
         result = CredentialsDAO().getAllCredentials()
         mapped_result = []
@@ -116,18 +124,13 @@ class CredentialsHandler:
 
         cemail = json.get('cemail');
 
-        cphone = json.get('cphone');
+        #cphone = json.get('cphone');
 
-        udescription = json.get('udescription');
+        #udescription = json.get('udescription');
 
-        if cuser_name and cpassword and cemail and cphone:
-            result = CredentialsDAO().insert(cuser_name,cpassword,cemail,cphone)
-            mapped_result = []
-            if not result:
-                return jsonify(Error="NOT FOUND"), 404
-            else:
-                for r in result:
-                    mapped_result.append(self.mapToUserDict(r))
-                return jsonify(User=mapped_result), 201
+        if cuser_name and cpassword and cemail:
+            cid = CredentialsDAO().insert(cuser_name,cpassword,cemail)
+            mapped_result = self.buildUserDict(cid,cuser_name,cpassword,cemail)
+            return jsonify(User=mapped_result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 404

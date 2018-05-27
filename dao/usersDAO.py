@@ -111,9 +111,25 @@ class UserDAO:
             result.append(row)
         return result
 
-    def insert(self,ufirst_name,ulast_name,udescription):
+    def insert(self,cid, ufirst_name,ulast_name,phone,udescription):
+
+        print(cid)
+        print(ufirst_name)
+        print(ulast_name)
+        print(udescription)
+        print(phone)
+        print ("userDAO")
+        cursor = self.conn.cursor()
+        query = "insert into Users(cid, ufirst_name, ulast_name, phone, udescription) " \
+                "values (%s,%s,%s,%s,%s) returning uid;"
+        cursor.execute(query,(cid, ufirst_name,ulast_name,phone,udescription, ))
+        pid = cursor.fetchone()[0]
+        self.conn.commit()
+        return pid
+        #return "Oh yeah"
        # insert
        # into
+
        # Users(cid, ufirst_name, ulast_name, phone, udescription)
        # values(1, 'Yomaira', 'Rivera', '17875556666', 'Hi everyone');
 
@@ -121,4 +137,3 @@ class UserDAO:
         #print ("userDAO")
        # cursor = self.conn.cursor()
         #query = "insert into Users()"
-        return "Oh Yeah"

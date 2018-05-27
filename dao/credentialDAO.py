@@ -77,15 +77,25 @@ class CredentialsDAO:
         print (result)
         return result
 
-    def insert(self,cuser_name,cpassword,cemail,cphone):
+    def insert(self,cuser_name,cpassword,cemail):
         print ("CredentialDAO")
+        print(cuser_name)
+        print(cpassword)
+        print(cemail)
+        cursor = self.conn.cursor()
+        query = "insert into Credentials(cpassword, cusername, cemail) values(%s,%s,%s) returning cid;"
+        cursor.execute(query, (cpassword ,cuser_name,cemail,))
+        cid = cursor.fetchone()[0]
+        self.conn.commit()
+        return cid
+
         #insert
         #into
         #Credentials(cpassword, cusername, cemail)
         #values('YERA1234', 'yomi', 'yomaira.rivera@gmail.edu')
-        dumy = [5, 'Mr', 'manny', 'g@mail']
-        table = []
-        table.append(dumy)
+        #dumy = [5, 'Mr', 'manny', 'g@mail']
+        #table = []
+        #table.append(dumy)
         print (dumy)
-        print (table)
-        return table
+        #print (table)
+        #return table

@@ -36,6 +36,16 @@ class UsersHandler:
         result['email'] = row[7]
         return result
 
+    def buildUserDict(self, uid,cid,firstname,lastname,phone,description):
+        result = {}
+        result['uid'] = uid
+        result['cid'] = cid
+        result['firstname'] = firstname
+        result['lastname'] = lastname
+        result['phone'] = phone
+        result['description'] = description
+        return result
+
     def getAllUsers(self):
         result = UserDAO().getAllUsers()
         mapped_result = []
@@ -151,21 +161,20 @@ class UsersHandler:
             return jsonify(User=mapped_result)
 
     def insertCredentialsJSON(self,json):
+        cid = json.get('cid')
+
         ufirst_name = json.get('ufirst_name')
 
         ulast_name = json.get('ulast_name');
 
         udescription = json.get('udescription');
 
-        if ufirst_name and ulast_name and udescription:
-            result = UserDAO().insert(ufirst_name,ulast_name,udescription)
-            mapped_result = []
-            if not result:
-                return jsonify(Error="NOT FOUND"), 404
-            else:
-                for r in result:
-                    mapped_result.append(self.mapToUserDict(r))
-                return jsonify(User=mapped_result), 201
+        phone = json.get('uphone');
+
+        if ufirst_name and ulast_name and udescription and phone:
+            uid = UserDAO().insert(cid,ufirst_name,ulast_name,phone,udescription)
+            mapped_result = self.buildUserDict(uid,cid,ufirst_name,ulast_name,phone,udescription)
+            return jsonify(User = mapped_result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 404
 
