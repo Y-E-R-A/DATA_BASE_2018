@@ -17,8 +17,8 @@ class UsersHandler:
     #User dictionary
     def mapToUsertoGroupDict(self, row):
         result = {}
-        result['uid'] = row[0]
-        result['gid'] = row[1]
+        result['gid'] = row[0]
+        result['uid'] = row[1]
         result['gname'] = row[2]
         result['gdescription'] = row[3]
         result['gdate'] = row[4]

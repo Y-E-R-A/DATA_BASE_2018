@@ -7,6 +7,10 @@
             templateUrl: 'pages/chat.html',
             controller: 'ChatController',
             controllerAs : 'chatCtrl'
+        }).when('/gchat/:uid/:gid', {
+            templateUrl: 'pages/gchat.html',
+            controller: 'GChatController',
+            controllerAs : 'gchatCtrl'
         }).when('/messagerating/:mid', {
             templateUrl: 'pages/messagerating.html',
             controller: 'MessageRatingController',
