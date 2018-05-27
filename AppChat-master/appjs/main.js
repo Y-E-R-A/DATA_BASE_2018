@@ -20,7 +20,7 @@
             controller: 'SignUpController',
             controllerAs : 'signupCtrl'
         }).otherwise({
-            redirectTo: '/signup'
+            redirectTo: '/login'
         });
     }]);
 
