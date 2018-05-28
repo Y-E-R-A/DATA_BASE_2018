@@ -1,5 +1,5 @@
 pg_config = {
     'user' : 'appusr',
-    'passwd' : 'appusr1',
+    'passwd' : 'icom2018',
     'dbname' : 'appdb'
 }

@@ -1,25 +1,29 @@
 <div ng-cloak style="align-content: center">
-    
-        <div class="row">
-            <div class="col s12 m6">
-                <div class="card">
-                    <div class="card-content ">
-                        <span class="card-title"><font face = "verdana" size = "5">Log In</font></span>
-                                <p><label for="uname"> <b>Username or Email </b></label>
-                                <input type="text" placeholder="Enter Username" name="uname" required></p>
-                        
-                                <p>
-                                <label for="psw"><b>Password</b></label>
-                                <input type="password" placeholder="Enter Password" name="psw" required></p>
-                                    
-                               <div class="card-action">     
-                                    <p align="right"><button class="waves-effect  black lighten-1 btn-small" >Log In</button>         
-                                    <a class="waves-effect  black lighten-1 btn-small" href="http://127.0.0.1:42617/index.html#!/signup">Sign Up </a></p>
-                                                                      
-                                    <a href="http://127.0.0.1:42617/index.html#!/chat">Exit</a>
-                                   
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title"><font face = "verdana" size = "5">Login</font></span>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>User: </th>
+                                <th><input ng-model="loginCtrl.user" ng-placeholder="{{userPH}}"></th>
+                            </tr>
+                            <tr>
+                                <th>Password: </th>
+                                <th><input ng-model="loginCtrl.password"></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                <div class="card-action">
+                    <a class="waves-effect  red lighten-1 btn-small" ng-click="loginCtrl.signupRedirect()">Sign Up</a>
+                    &nbsp; &nbsp;
+                    <a class="waves-effect  red lighten-1 btn-small" ng-click="loginCtrl.loginUser()">Login</a>
                 </div>
             </div>
-     </div>
+        </div>
+    </div>
 </div>
-   

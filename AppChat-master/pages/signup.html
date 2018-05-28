@@ -1,38 +1,48 @@
 <div ng-cloak style="align-content: center">
     <div class="row">
-             <div class="card teal darken-2">
-                <div class="card-content ">
-                      
-                        <span class="card-title"><font face = "verdana" size = "5">Sign Up</font></span>
-                      
-                               
-                            <p>
-                            <label for="uname"> <b>First Name</b></label>
-                            <input type="text" placeholder="Enter First Name" name="uname" required></p>
-                            <p>
-                            <label for="lname"><b>Last Name</b></label>
-                            <input type="text" placeholder="Enter Last Name" name="lname" required></p>
-                            <p>
-                            <label for="user"><b>Username</b></label>
-                            <input type="text" placeholder="Enter Username" name="user" required></p>        
-                            <p>
-                            <label for="psw"><b>Password</b></label>
-                            <input type="text" placeholder="Enter Password" name="psw" required></p>
-                            <p>
-                            <label for="e"><b>Email</b></label>
-                            <input type="text" placeholder="Enter Email" name="e" required></p>
-                            <p>
-                            <label for="phone"><b>Phone</b></label>
-                            <input type="text" placeholder="Enter Phone" name="phone" required></p>
-                            
-                            <p align =center><button type="submit">Submit</button>
-
-                            <a href="http://127.0.0.1:42617/index.html#!/chat">Exit</a></p>
-                            
-
-        
-          
-                 </div>
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Login</span>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>First Name: </th>
+                                <th><input ng-model="signupCtrl.first_name"></th>
+                            </tr>
+                            <tr>
+                                <th>Last Name: </th>
+                                <th><input ng-model="signupCtrl.last_name"></th>
+                            </tr>
+                            <tr>
+                                <th>User Name: </th>
+                                <th><input ng-model="signupCtrl.user_name"></th>
+                            </tr>
+                            <tr>
+                                <th>Password: </th>
+                                <th><input ng-model="signupCtrl.password"></th>
+                            </tr>
+                            <tr>
+                                <th>Email: </th>
+                                <th><input ng-model="signupCtrl.email"></th>
+                            </tr>
+                            <tr>
+                                <th>Phone: </th>
+                                <th><input ng-model="signupCtrl.phone"></th>
+                            </tr>
+                            <tr>
+                                <th>Description: </th>
+                                <th><input ng-model="signupCtrl.description"></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                <div class="card-action">
+                    <a class="waves-effect  grey btn-small" href="#/login">Back</a>
+                    &nbsp; &nbsp;
+                    <a class="waves-effect  red lighten-1 btn-small" ng-click="signupCtrl.signUp()">Sign Up</a>
+                </div>
             </div>
         </div>
     </div>

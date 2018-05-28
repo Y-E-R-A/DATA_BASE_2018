@@ -17,8 +17,8 @@ class UsersHandler:
     #User dictionary
     def mapToUsertoGroupDict(self, row):
         result = {}
-        result['uid'] = row[0]
-        result['gid'] = row[1]
+        result['gid'] = row[0]
+        result['uid'] = row[1]
         result['gname'] = row[2]
         result['gdescription'] = row[3]
         result['gdate'] = row[4]
@@ -34,6 +34,16 @@ class UsersHandler:
         result['description'] = row[5]
         result['username'] = row[6]
         result['email'] = row[7]
+        return result
+
+    def buildUserDict(self, uid,cid,firstname,lastname,phone,description):
+        result = {}
+        result['uid'] = uid
+        result['cid'] = cid
+        result['firstname'] = firstname
+        result['lastname'] = lastname
+        result['phone'] = phone
+        result['description'] = description
         return result
 
     def getAllUsers(self):
@@ -149,4 +159,22 @@ class UsersHandler:
                 mapped_result.append(self.mapToUserMessageDict(r))
 
             return jsonify(User=mapped_result)
+
+    def insertCredentialsJSON(self,json):
+        cid = json.get('cid')
+
+        ufirst_name = json.get('ufirst_name')
+
+        ulast_name = json.get('ulast_name');
+
+        udescription = json.get('udescription');
+
+        phone = json.get('uphone');
+
+        if ufirst_name and ulast_name and udescription and phone:
+            uid = UserDAO().insert(cid,ufirst_name,ulast_name,phone,udescription)
+            mapped_result = self.buildUserDict(uid,cid,ufirst_name,ulast_name,phone,udescription)
+            return jsonify(User = mapped_result), 201
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 404
 

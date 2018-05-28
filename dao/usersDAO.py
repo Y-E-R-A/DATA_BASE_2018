@@ -64,7 +64,11 @@ class UserDAO:
 
     def getUserGroupsById(self, uid):
         cursor = self.conn.cursor()
-        query = "select * from Participates natural join Groups where uid = %s;"
+        #query = "select * from Participates natural join Groups where uid = %s;"
+        query = "with P as (select * from participates where uid=%s),G as " \
+                "(select gid,gname, gdescription,gdCreation,uid as Group_Creator from groups)" \
+                "Select *" \
+                "from P natural inner join G"
         cursor.execute(query, (uid,))
         result = []
         for row in cursor:
@@ -106,3 +110,30 @@ class UserDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def insert(self,cid, ufirst_name,ulast_name,phone,udescription):
+
+        print(cid)
+        print(ufirst_name)
+        print(ulast_name)
+        print(udescription)
+        print(phone)
+        print ("userDAO")
+        cursor = self.conn.cursor()
+        query = "insert into Users(cid, ufirst_name, ulast_name, phone, udescription) " \
+                "values (%s,%s,%s,%s,%s) returning uid;"
+        cursor.execute(query,(cid, ufirst_name,ulast_name,phone,udescription, ))
+        pid = cursor.fetchone()[0]
+        self.conn.commit()
+        return pid
+        #return "Oh yeah"
+       # insert
+       # into
+
+       # Users(cid, ufirst_name, ulast_name, phone, udescription)
+       # values(1, 'Yomaira', 'Rivera', '17875556666', 'Hi everyone');
+
+
+        #print ("userDAO")
+       # cursor = self.conn.cursor()
+        #query = "insert into Users()"
