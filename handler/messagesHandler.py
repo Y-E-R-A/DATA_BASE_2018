@@ -20,6 +20,14 @@ class MessagesHandler:
         result['uid'] = uid
         return result
 
+    def buildMsgDict(self, mid, mdate, minfo, uid):
+        result = {}
+        result['mid'] = mid
+        result['mdate'] = mdate
+        result['minfo'] = minfo
+        result['uid'] = uid
+        return result
+
     def getAllMessages(self):
         result = messageDAO().getAllMessages()
         mapped_result = []
@@ -109,3 +117,28 @@ class MessagesHandler:
                     return jsonify(Message=result), 201
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
+    def insertCredentialsJSON(self, json):
+
+        uid = json.get('uid')
+
+        mdate = json.get('mdate')
+
+        minfo = json.get('minfo')
+
+        if uid and mdate  and minfo:
+            mid = messageDAO().insert(mdate,minfo,uid)
+            mapped_result = self.buildMsgDict(mid,mdate,minfo,uid)
+            return jsonify(User=mapped_result), 201
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 404
+
+
+    def getConversation(self,uid1, uid2):
+        result = messageDAO().getConversation(uid1,uid2)
+        mapped_result = []
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            for r in result:
+                mapped_result.append(self.mapToMsgDict(r))
+            return jsonify(Messages=mapped_result)

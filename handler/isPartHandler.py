@@ -11,6 +11,13 @@ class IsPartHandler:
         #result['gid'] = row[2]
         return result
 
+    def buildDict(self, mid,gid):
+        result = {}
+        result['mid'] = mid
+        result['gid'] = gid
+        #result['gid'] = row[2]
+        return result
+
     def getAllIsPart(self):
         dao = IsPartDAO()
         result = dao.getAllIsPart()
@@ -49,3 +56,14 @@ class IsPartHandler:
             for r in result:
                 mapped_result.append(self.mapToDict(r))
             return jsonify(PartOfGroup=mapped_result)
+
+    def insertCredentialsJSON(self, json):
+        mid = json.get('mid')
+        gid = json.get('gid')
+
+        if mid and gid:
+            IsPartDAO().insert(mid,gid)
+            mapped_result = self.buildDict(mid,gid)
+            return jsonify(User=mapped_result), 201
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 404

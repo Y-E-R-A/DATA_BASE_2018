@@ -169,13 +169,17 @@ def getCredentialsByEmai(cemail):                                  #
 # ################
 
 #SEARCHING BY MESSAGE ATTRIBUTE
-@app.route('/MessagingAppP1/messages')
+@app.route('/MessagingAppP1/messages', methods=['GET','POST'])
 def getAllMessages():
-    if request.args:
-        return MessagesHandler.getAllMessages(request.args)
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return MessagesHandler().insertCredentialsJSON(request.json)
     else:
-        handler = MessagesHandler()
-        return handler.getAllMessages()
+        if request.args:
+            return MessagesHandler.getAllMessages(request.args)
+        else:
+            handler = MessagesHandler()
+            return handler.getAllMessages()
 
 @app.route('/MessagingAppP1/messages/<int:mid>')
 def getMessageById(mid):
@@ -239,6 +243,11 @@ def getReplayByReplyToId(rid): #Search by reply message id
     return ReplyHandler().getReplyByReplyToId(rid)
 
 
+#MESSAGES FROM CHAT OF 2 USERS
+@app.route('/MessagingAppP1/message/conversation/<int:uid1>/<int:uid2>')
+def getConversation(uid1,uid2):
+    return MessagesHandler().getConversation(uid1,uid2)
+
 ################
 #     GROUPS   #
 ################
@@ -294,13 +303,17 @@ def getMessagesByGroupId(gid):
 #     Reaction       #
 ######################
 #ALL REACTIONS
-@app.route('/MessagingAppP1/reactions')
+@app.route('/MessagingAppP1/reactions', methods = ['GET','POST'])
 def getAllReactions():
-   if request.args:
-       return ReactionHandler.getAllReactions(request.args)
+   if request.method == 'POST':
+       print("REQUEST: ", request.json)
+       return ReactionHandler().insertCredentialsJSON(request.json)
    else:
-       handler = ReactionHandler()
-       return handler.getAllReactions()
+        if request.args:
+            return ReactionHandler.getAllReactions(request.args)
+        else:
+            handler = ReactionHandler()
+            return handler.getAllReactions()
 
 #SEARCH REACTION BY ATTRIBUTE
 #Posible Removal
@@ -372,9 +385,13 @@ def getReceivedMsgByMessageId(mid):
 #    Is Part     #
 # ################
 
-@app.route('/MessagingAppP1/PartOfGroup')
+@app.route('/MessagingAppP1/PartOfGroup', methods=['GET','POST'])
 def getAllIsPart():
-    return IsPartHandler().getAllIsPart()
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return IsPartHandler().insertCredentialsJSON(request.json)
+    else:
+        return IsPartHandler().getAllIsPart()
 #Posible Removal
 @app.route('/MessagingAppP1/PartOfGroup/<int:pid>')
 def getIsPartById(pid):
@@ -427,6 +444,7 @@ def getMediaByName(mename):
 @app.route('/MessagingAppP1/media/address/<string:meaddress>')
 def getMediaByAddress(meaddress):
    return MediaHandler().getMediaByAddress(meaddress)
+
 
 @app.route('/MessagingAppP1/media/type/<string:metype>')
 def getMediaByType(metype):

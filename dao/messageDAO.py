@@ -57,7 +57,17 @@ class messageDAO:
         return result
 
 
-
+    def getConversation(self, uid1, uid2):
+        cursor = self.conn.cursor()
+        query = "select M.mid,mdate,minfo,M.uid as sender, R.uid as receiver " \
+                "from messages as M inner join receive as R on R.mid = M.mid " \
+                "where (M.uid= %s and R.uid = %s) or (M.uid = %s and R.uid = %s) " \
+                "order by mdate desc;"
+        cursor.execute(query, (uid1, uid2, uid2, uid1))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
 
 
@@ -66,8 +76,8 @@ class messageDAO:
 
     def insert(self, mdate, minfo, uid):
         cursor = self.conn.cursor()
-        query = "insert into messages(mdate, minfo, uid) values (%s, %s, %s) returning mid;"
-        cursor.execute(query, (mdate, minfo, uid,))
+        query = "insert into messages(mdate, minfo, uid) values (now(), %s, %s) returning mid;"
+        cursor.execute(query, (minfo, uid,))
         mid = cursor.fetchone()[0]
         self.conn.commit()
         return mid
@@ -78,4 +88,6 @@ class messageDAO:
         cursor.execute(query, (mid, mdate, minfo, uid,))
         self.conn.commit()
         return mid
+
+
 
