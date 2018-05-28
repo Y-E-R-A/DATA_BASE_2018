@@ -302,13 +302,17 @@ def getMessagesByGroupId(gid):
 #     Reaction       #
 ######################
 #ALL REACTIONS
-@app.route('/MessagingAppP1/reactions')
+@app.route('/MessagingAppP1/reactions', methods = ['GET','POST'])
 def getAllReactions():
-   if request.args:
-       return ReactionHandler.getAllReactions(request.args)
+   if request.method == 'POST':
+       print("REQUEST: ", request.json)
+       return ReactionHandler().insertCredentialsJSON(request.json)
    else:
-       handler = ReactionHandler()
-       return handler.getAllReactions()
+        if request.args:
+            return ReactionHandler.getAllReactions(request.args)
+        else:
+            handler = ReactionHandler()
+            return handler.getAllReactions()
 
 #SEARCH REACTION BY ATTRIBUTE
 #Posible Removal

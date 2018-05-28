@@ -119,12 +119,13 @@ class ReactionDAO:
 
 
     def insert(self, mid, uid,rating):
+        print("DAO")
         cursor = self.conn.cursor()
-        query = "insert into Reaction(mid, uid, rating) values (%s, %s, %s) returning rid;"
+        query = "insert into Reaction(mid, uid, rating) values (%s, %s, %s);"
         cursor.execute(query, (mid, uid, rating,))
-        rid = cursor.fetchone()[0]
+        #rid = cursor.fetchone()[0]
         self.conn.commit()
-        return rid
+        return
 
     def update(self, mid, uid, rating):
         cursor = self.conn.cursor()

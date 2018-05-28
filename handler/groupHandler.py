@@ -19,11 +19,14 @@ class GroupHandler:
         #result['minfo'] = row[1]
         #result['uid'] = row[2]
         result['gid'] = row[0]
-        result['mid'] = row[1]
-        result['minfo'] = row[2]
-        result['mdate'] = row[3]
-        result['uid'] = row[4]
-        result['cusername'] = row[5]
+        result['gname'] = row[1]
+        result['mid'] = row[2]
+        result['minfo'] = row[3]
+        result['mdate'] = row[4]
+        result['uid'] = row[5]
+        result['cusername'] = row[6]
+        result['likes'] = row[7]
+        result['dislikes'] = row[8]
         return result
 
     def getAllGroups(self):

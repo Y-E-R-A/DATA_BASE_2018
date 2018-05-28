@@ -40,6 +40,13 @@ class ReactionHandler:
         result['rating'] = rating
         return result
 
+    def buildToDict(self, mid,uid,rating):
+        result = {}
+        result['mid'] = mid
+        result['uid'] = uid
+        result['rating'] = rating
+        return result
+
     def getAllReactions(self):
         dao = ReactionDAO()
         result = dao.getAllReactions()
@@ -143,22 +150,6 @@ class ReactionHandler:
                 mapped_result.append(self.mapToDict(r))
             return jsonify(Reaction=mapped_result)
 
-
-    def insert(self, form):
-        if len(form) != 4:
-            return jsonify(Error="Malformed post request"), 400
-        else:
-            mid = form['mid']
-            uid = form['uid']
-            rating = form['rating']
-            if mid and uid and rating:
-                dao = ReactionDAO()
-                rid = dao.insert(mid, uid, rating)
-                result = self.build_messages_attributes(mid, mdate, minfo, uid)
-                return jsonify(Message=result), 201
-            else:
-                return jsonify(Error="Unexpected attributes in post request"), 400
-
     def updateMessages(self, uid, form):
         dao = ReactionDAO()
         if not dao.getAllReactions(uid):
@@ -178,4 +169,20 @@ class ReactionHandler:
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
+    def insertCredentialsJSON(self, json):
+
+        mid = json.get('mid')
+
+        uid = json.get('uid')
+
+        rating = json.get('rating')
+        print(mid)
+        print(uid)
+        print(rating)
+        if uid and rating  and mid:
+            ReactionDAO().insert(mid,uid,rating)
+            mapped_result = self.buildToDict(mid,uid,rating)
+            return jsonify(User=mapped_result), 201
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 404
 

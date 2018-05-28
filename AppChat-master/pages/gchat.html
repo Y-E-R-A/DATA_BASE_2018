@@ -32,7 +32,7 @@
     <!--<div  id="chat-list" style="height:300px;overflow:auto">-->
     <div>
         <!-- Here come the messages in the chat, each one presented in card -->
-        <div ng-repeat="m in gchatCtrl.messageList">
+        <div ng-repeat="m in gchatCtrl.newMessageList">
             <!-- This card prodives space for the message and Like/dislike buttons -->
             <div class="row">
                 <div class="col s12 m6">
@@ -53,11 +53,12 @@
                             <span class="md-subhead" >{{m.mDate}}</span></div>
                             <div class="card-action">
                             
-                            <a class="btn-floating btn-small waves-effect waves-light blue"  ng-click="countLike=countLike+1" ng-init="countLike=(m.like||0)"><i class="material-icons"><md-button>thumb_up</md-button>
-                            </i></a>{{countLike}}
+                            <a class="btn-floating btn-small waves-effect waves-light blue"  ng-click="gchatCtrl.likeMessage(m.mid)" ng-init="countLike=(m.like||0)"><i class="material-icons"><md-button>thumb_up</md-button>
+                            </i></a>{{m.likes}}
                             
-                            <a class="btn-floating btn-small waves-effect waves-light blue"  ng-click="countDislikes=countDislikes+1" ng-init="countDislikes=(m.dislike||0)"><i class="material-icons"><md-button>thumb_down</md-button>
-                            </i></a>{{countDislikes}}
+                            <a class="btn-floating btn-small waves-effect waves-light blue"  ng-click="gchatCtrl.dislikeMessage(m.mid)" ng-init="countDislikes=(m.dislike||0)"><i class="material-icons"><md-button>thumb_down</md-button>
+                            </i></a>{{m.dislikes}}
+                                
                             <td><a class="waves-effect  green lighten-1 btn-small" ng-click="gchatCtrl.messageRating(m.mid)">Reaction</a></td>
                              
                         </div>

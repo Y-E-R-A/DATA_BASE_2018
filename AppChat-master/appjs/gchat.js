@@ -35,9 +35,9 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
 
                     console.log("response1: " + JSON.stringify(response));
                     
-                    thisCtrl.messageList = response.data.GroupMessages;
+                    thisCtrl.newMessageList = response.data.GroupMessages;
 
-                    console.log("msList: " + JSON.stringify(thisCtrl.messageList));
+                    console.log("msList: " + JSON.stringify(thisCtrl.newMessageList));
                 }, // error callback
                 function (response){
                     // This is the error function
@@ -62,7 +62,7 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
                     }
                 }
             );
-            $log.error("Message Loaded: ", JSON.stringify(thisCtrl.messageList));
+            $log.error("Message Loaded: ", JSON.stringify(thisCtrl.newMessageList));
         };
         
         
@@ -198,8 +198,122 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
                 }
             );
         };
+        this.likeMessage = function(mid){
+            // Get the target part id from the parameter in the url
+            // using the $routerParams object
+            //var userId = $routeParams.uid;
+            console.log("Howdy")
+            var data = {};
+            console.log("mid from args: "+mid)
+            console.log("mid: "+this.mid);
+            data.mid = mid;
+            data.uid = $routeParams.uid;
+            data.rating = 'like';
+            
+            console.log("data: " + JSON.stringify(data));
+            
+            // Now create the url with the route to talk with the rest API
+            var reqURL = "http://localhost:5000/MessagingAppP1/reactions";
+            console.log("reqURL: " + reqURL);
+            var config = { headers : 
+                          {'Content-Type':'application/json;charset=utf-8;' }
+                         }
         
+            // Now issue the http request to the rest API
+            $http.post(reqURL,data,config).then(
+                // Success function
+                function (response) {
+                    console.log("response: " + JSON.stringify(response.data))
+                    // assing the part details to the variable in the controller
+                    //alert("New user added with id: " +response.data.);
+                    //$location.url('/login');
+                    thisCtrl.reload();
+                    
+                }, //Error function
+                function (response) {
+                    // This is the error function
+                    // If we get here, some error occurred.
+                    // Verify which was the cause and show an alert.
+                    var status = response.status;
+                    //console.log("thiscredentialList: " +JSON.stringify(thisCtrl.newMessageList));
+                    //console.log("Error: " + reqURL);
+                    //alert("Cristo");
+                    if (status == 0) {
+                        alert("No hay conexion a Internet");
+                    }
+                    else if (status == 401) {
+                        alert("Su sesion expiro. Conectese de nuevo.");
+                    }
+                    else if (status == 403) {
+                        alert("No esta autorizado a usar el sistema.");
+                    }
+                    else if (status == 404) {
+                        alert("No se encontro la informacion solicitada.");
+                    }
+                    else {
+                        alert("Error interno del sistema.");
+                    }
+                }
+            );
+        };
+        this.dislikeMessage = function(mid){
+            // Get the target part id from the parameter in the url
+            // using the $routerParams object
+            //var userId = $routeParams.uid;
+            console.log("Howdy")
+            var data = {};
+            console.log("mid from args: "+mid)
+            console.log("mid: "+this.mid);
+            data.mid = mid;
+            data.uid = $routeParams.uid;
+            data.rating = 'dislike';
+            
+            console.log("data: " + JSON.stringify(data));
+            
+            // Now create the url with the route to talk with the rest API
+            var reqURL = "http://localhost:5000/MessagingAppP1/reactions";
+            console.log("reqURL: " + reqURL);
+            var config = { headers : 
+                          {'Content-Type':'application/json;charset=utf-8;' }
+                         }
         
+            // Now issue the http request to the rest API
+            $http.post(reqURL,data,config).then(
+                // Success function
+                function (response) {
+                    console.log("response: " + JSON.stringify(response.data))
+                    // assing the part details to the variable in the controller
+                    //alert("New user added with id: " +response.data.);
+                    //$location.url('/login');
+                    thisCtrl.reload();
+                    
+                }, //Error function
+                function (response) {
+                    // This is the error function
+                    // If we get here, some error occurred.
+                    // Verify which was the cause and show an alert.
+                    var status = response.status;
+                    //console.log("thiscredentialList: " +JSON.stringify(thisCtrl.newMessageList));
+                    //console.log("Error: " + reqURL);
+                    //alert("Cristo");
+                    if (status == 0) {
+                        alert("No hay conexion a Internet");
+                    }
+                    else if (status == 401) {
+                        alert("Su sesion expiro. Conectese de nuevo.");
+                    }
+                    else if (status == 403) {
+                        alert("No esta autorizado a usar el sistema.");
+                    }
+                    else if (status == 404) {
+                        alert("No se encontro la informacion solicitada.");
+                    }
+                    else {
+                        alert("Error interno del sistema.");
+                    }
+                }
+            );
+        };
         this.messageRating = function (mid) {
             $location.url('/messagerating/' + mid);
         };
@@ -208,7 +322,8 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
             $location.url('/login');
         };
         
-        this.realod = function(){
+        this.reload = function(){
+            console.log("RELOAD")
             location.reload();
         }
             
