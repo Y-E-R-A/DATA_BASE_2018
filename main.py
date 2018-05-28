@@ -216,6 +216,11 @@ def getReplayByReplyToId(rid): #Search by reply message id
     return ReplyHandler().getReplyByReplyToId(rid)
 
 
+#MESSAGES FROM CHAT OF 2 USERS
+@app.route('/MessagingAppP1/message/conversation/<int:uid1>/<int:uid2>')
+def getConversation(uid1,uid2):
+    return MessagesHandler().getConversation(uid1,uid2)
+
 ################
 #     GROUPS   #
 ################
@@ -395,6 +400,7 @@ def getMediaByName(mename):
 @app.route('/MessagingAppP1/media/address/<string:meaddress>')
 def getMediaByAddress(meaddress):
    return MediaHandler().getMediaByAddress(meaddress)
+
 
 @app.route('/MessagingAppP1/media/type/<string:metype>')
 def getMediaByType(metype):

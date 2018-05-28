@@ -109,3 +109,14 @@ class MessagesHandler:
                     return jsonify(Message=result), 201
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
+
+
+    def getConversation(self,uid1, uid2):
+        result = messageDAO().getConversation(uid1,uid2)
+        mapped_result = []
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            for r in result:
+                mapped_result.append(self.mapToMsgDict(r))
+            return jsonify(Messages=mapped_result)
