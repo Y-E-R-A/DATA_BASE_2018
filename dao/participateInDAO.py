@@ -56,3 +56,13 @@ class PinDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def insert(self,uid,gid):
+        print("PinDAO")
+        print(uid)
+        print(gid)
+        cursor = self.conn.cursor()
+        query = "insert into participates (uid, gid) values ( %s, %s) ;"
+        cursor.execute(query, (uid, gid,))
+        self.conn.commit()
+        return

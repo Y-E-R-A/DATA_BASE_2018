@@ -8,20 +8,20 @@
                         <tbody>
                             <tr>
                                 <th>Group Name: </th>
-                                <th><input ng-model="signupCtrl.first_name"></th>
+                                <th><input ng-model="newGroupCtrl.group_name"></th>
                             </tr>
                             <tr>
                                 <th>Group Description: </th>
-                                <th><input ng-model="signupCtrl.last_name"></th>
+                                <th><input ng-model="newGroupCtrl.group_description"></th>
                             </tr>
                             <tbody>
                     </table>
                 </div>
                 <div>
                 <div class="card-action">
-                    <a class="waves-effect  grey btn-small" href="#/login">Back</a>
+                    <a class="waves-effect  grey btn-small" href="#/chat">Back</a>
                     &nbsp; &nbsp;
-                    <a class="waves-effect  red lighten-1 btn-small" ng-click="signupCtrl.signUp()">Sign Up</a>
+                    <a class="waves-effect  red lighten-1 btn-small" ng-click="newGroupCtrl.createNewGroup()">Create</a>
                 </div>
             </div>
         </div>

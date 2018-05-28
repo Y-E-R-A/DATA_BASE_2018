@@ -67,6 +67,10 @@ angular.module('AppChat').controller('ChatController', ['$http', '$log', '$scope
         this.loginRedirect= function(){
             $location.url('/login');
         };
+        
+        this.createGroupRedirect= function(){
+            $location.url('/newgroup');
+        };
             
         this.loadMessages();
 }]);

@@ -244,10 +244,11 @@ def getReplayByReplyToId(rid): #Search by reply message id
 ################
 
 #ALL GROUPS
-@app.route('/MessagingAppP1/groups')
+@app.route('/MessagingAppP1/groups', methods=['GET','POST'])
 def getAllGroups():
-   if request.args:
-       return GroupHandler.getAllGroups(request.args)
+   if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return GroupHandler().insertCredentialsJSON(request.json)
    else:
        handler = GroupHandler()
        return handler.getAllGroups()
@@ -315,10 +316,14 @@ def getLikesDislikes(rating):
 ########################
 #  Group Participation #
 # ######################
-@app.route('/MessagingAppP1/GroupParticipants')
+@app.route('/MessagingAppP1/GroupParticipants', methods=['GET','POST'])
 def getAllPinRelation():
-    handler = ParticipationHandler()
-    return handler.getAllParticipants()
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return ParticipationHandler().insertCredentialsJSON(request.json)
+    else:
+        handler = ParticipationHandler()
+        return handler.getAllParticipants()
 
 @app.route('/MessagingAppP1/GroupParticipants/<int:pid>')
 def getPinById(pid):
@@ -328,9 +333,13 @@ def getPinById(pid):
 ##################
 #  Administrator #
 # ################
-@app.route('/MessagingAppP1/Admins')
+@app.route('/MessagingAppP1/Admins', methods=['GET','POST'])
 def getAllAdmin():
-    return AdminHandler().getAllAdmin()
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return AdminHandler().insertCredentialsJSON(request.json)
+    else:
+        return AdminHandler().getAllAdmin()
 
 #Posible Removal
 @app.route('/MessagingAppP1/Admin/<int:aid>')

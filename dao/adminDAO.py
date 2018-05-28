@@ -48,3 +48,14 @@ class AdminDAO:
         for row in cursor:
             result.append(row)
         return result
+
+
+    def insert(self,adminId, gid):
+        print ("AdminDAO")
+        print(adminId)
+        print(gid)
+        cursor = self.conn.cursor()
+        query = "insert into administrate (uid, gid) values ( %s, %s);"
+        cursor.execute(query, (adminId, gid,))
+        self.conn.commit()
+        return

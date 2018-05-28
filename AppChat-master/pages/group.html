@@ -1,5 +1,10 @@
 <div ng-cloak style="align-content: center">
     <div class="row">
+         
+        <p align="right"><button class="btn waves-effect waves-light " type="submit" name="action" ng-click="groupCtrl.createGroup()">Create New Group
+                    </button> </p> 
+        
+        
         <div class="col s12 m6">
             <div class="card teal darken-1">
                 
@@ -8,10 +13,7 @@
                     <i class="material-icons prefix" style="color: white">mode_edit</i> <span text-white style="font-size:larger; color:white">Group:</span>
                      <textarea style="background: white" id="textarea1" class="materialize-textarea" ng-model="chatCtrl.newText"></textarea>
                 </div>
-                <div class="card-action white">
-                    <button class="btn waves-effect waves-light " type="submit" name="action" ng-click="groupCtrl.createGroup()">Create group
-                    </button>
-                </div>
+                
             </div>
         </div>
 

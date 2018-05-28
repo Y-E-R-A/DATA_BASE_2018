@@ -10,7 +10,7 @@
         }).when('/gchat/:uid/:gid', {
             templateUrl: 'pages/gchat.html',
             controller: 'GChatController',
-            controllerAs : 'gchatCtrl'
+            controllerAs : 'gchatCtrl/:uid/:gid'
         }).when('/messagerating/:mid', {
             templateUrl: 'pages/messagerating.html',
             controller: 'MessageRatingController',
@@ -27,6 +27,14 @@
             templateUrl: 'pages/login.html',
             controller: 'LoginController',
             controllerAs : 'loginCtrl'
+        }).when('/newgroup/:uid', {
+            templateUrl: 'pages/newgroup.html',
+            controller: 'NewGroupController',
+            controllerAs : 'newGroupCtrl'
+        }).when('/addparticipant/:uid', {
+            templateUrl: 'pages/addparticipant.html',
+            controller: 'AddParticipantController',
+            controllerAs : 'addParticipantCtrl'
         }).otherwise({
             redirectTo: '/login'
         });

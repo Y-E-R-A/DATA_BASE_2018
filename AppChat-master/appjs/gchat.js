@@ -37,6 +37,13 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
         this.loginRedirect= function(){
             $location.url('/login');
         };
+        
+        this.createGroupRedirect= function(){
+            $location.url('/newgroup');
+        };
             
+        this.createAddParticipantRedirect= function(){
+            $location.url('/addparticipant');
+        };
         this.loadMessages();
 }]);

@@ -76,3 +76,15 @@ class groupDAO:
             result.append(row)
         return result
 
+    def insert(self,gname,gdescription, gcreation, adminId):
+        print ("GroupDAO")
+        print(gname)
+        print(gdescription)
+        print("gcreation ",gcreation)
+        print("admin Id: ", adminId)
+        cursor = self.conn.cursor()
+        query = "insert into Groups(gname, gdescription, gdcreation, uid) values ( %s, %s, now(), %s) returning gid;"
+        cursor.execute(query, (gname, gdescription, adminId,))
+        gid = cursor.fetchone()[0]
+        self.conn.commit()
+        return gid
