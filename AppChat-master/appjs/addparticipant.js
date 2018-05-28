@@ -41,7 +41,11 @@ angular.module('AppChat').controller('AddParticipantController', ['$http', '$log
                     // If we get here, some error occurred.
                     // Verify which was the cause and show an alert.
                     var status = response.status;
+
                     console.log("Unable to perform operation");
+
+                    console.log("Unable to perform operation";
+
                     
                     if (status == 0) {
                         alert("No hay conexion a Internet");
@@ -143,5 +147,9 @@ angular.module('AppChat').controller('AddParticipantController', ['$http', '$log
             
                                                            
                                                            
+<<<<<<< HEAD
 ]);
 
+=======
+]);
+>>>>>>> origin/master

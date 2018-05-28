@@ -37,7 +37,7 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
                     
                     thisCtrl.newMessageList = response.data.GroupMessages;
 
-                    console.log("msList: " + JSON.stringify(thisCtrl.newMessageList));
+                    console.log("newMessageList: " + JSON.stringify(thisCtrl.newMessageList));
                 }, // error callback
                 function (response){
                     // This is the error function
@@ -346,7 +346,6 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
         this.AddParticipantRedirect= function(){
             $location.url('/addparticipant');
         };
-
         
         this.loadMessages();
 }]);

@@ -211,6 +211,6 @@ angular.module('AppChat').controller('NewGroupController', ['$http', '$log', '$s
                 }      
             );
         };
-}                                                         
-]);
+}]);
+
 

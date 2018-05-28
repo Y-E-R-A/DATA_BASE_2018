@@ -10,7 +10,7 @@
         }).when('/gchat/:uid/:gid', {
             templateUrl: 'pages/gchat.html',
             controller: 'GChatController',
-            controllerAs : 'gchatCtrl/:uid/:gid'
+            controllerAs : 'gchatCtrl'
         }).when('/messagerating/:mid', {
             templateUrl: 'pages/messagerating.html',
             controller: 'MessageRatingController',
