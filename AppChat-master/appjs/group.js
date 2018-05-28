@@ -67,5 +67,4 @@ angular.module('AppChat').controller('GroupController', ['$http', '$log', '$scop
             $location.url('/gchat/'+$routeParams.uid+'/'+gid);
         }
         this.getGroups();
-        
 }]);

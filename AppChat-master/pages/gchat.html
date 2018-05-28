@@ -1,12 +1,20 @@
 <div class="row">
     
-    <p align="left"><a class="waves-effect  black lighten-1 btn-small" ng-click="gchatCtrl.reload()">Reload </a></p> 
+    <p align="left"><a class="waves-effect  blue lighten-1 btn-small" ng-click="gchatCtrl.reload()">Reload </a></p> 
+</div> 
+
+<div class="row">
+    <p align="left"><a class="waves-effect  green lighten-1 btn-small" ng-click="gchatCtrl.search()">Search </a></p> 
 </div> 
 
 <div class="row">
     
     <p align="left"><a class="waves-effect  black lighten-1 btn-small" ng-click="gchatCtrl.loginRedirect()">Logout </a></p> 
 </div> 
+
+<div class="row">
+    <p align="left"><a class="waves-effect  black lighten-1 btn-small" ng-click="gchatCtrl.AddParticipantRedirect()">Add Participant</a></p>
+</div>
 
 <div ng-cloak style="align-content: center">
     <div class="row">
@@ -60,6 +68,8 @@
                             </i></a>{{m.dislikes}}
                                 
                             <td><a class="waves-effect  green lighten-1 btn-small" ng-click="gchatCtrl.messageRating(m.mid)">Reaction</a></td>
+                                
+                            <td><a class="waves-effect  gray lighten-1 btn-small" ng-click="gchatCtrl.reply(m.minfo)">Reply</a></td>
                              
                         </div>
                     </div>

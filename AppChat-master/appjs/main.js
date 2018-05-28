@@ -23,10 +23,22 @@
             templateUrl: 'pages/group.html',
             controller: 'GroupController',
             controllerAs : 'groupCtrl'
+        }).when('/reply/:uid/:gid/:minfo', {
+            templateUrl: 'pages/reply.html',
+            controller: 'ReplyController',
+            controllerAs : 'replyCtrl'
         }).when('/login', {
             templateUrl: 'pages/login.html',
             controller: 'LoginController',
             controllerAs : 'loginCtrl'
+        }).when('/newgroup/:uid', {
+            templateUrl: 'pages/newgroup.html',
+            controller: 'NewGroupController',
+            controllerAs : 'newGroupCtrl'
+        }).when('/addparticipant/:uid', {
+            templateUrl: 'pages/addparticipant.html',
+            controller: 'AddParticipantController',
+            controllerAs : 'addParticipantCtrl'
         }).otherwise({
             redirectTo: '/login'
         });

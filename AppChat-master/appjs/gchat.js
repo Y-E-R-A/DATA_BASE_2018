@@ -314,6 +314,7 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
                 }
             );
         };
+        
         this.messageRating = function (mid) {
             $location.url('/messagerating/' + mid);
         };
@@ -326,6 +327,26 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
             console.log("RELOAD")
             location.reload();
         }
+        
+        this.search = function(){
+            $location.url('/gsearch/'+$routeParams.gid);
+        }
             
+        this.reply = function(minfo){
+            console.log("message info: "+minfo);
+            console.log("User Id: "+$routeParams.uid);
+            console.log("Group Id: "+$routeParams.gid);
+            console.log('/reply/'+$routeParams.uid+'/'+$routeParams.gid+'/'+minfo); 
+            $location.url('/reply/' + $routeParams.uid + '/' + $routeParams.gid + '/' + minfo);
+        }
+        this.createGroupRedirect= function(){
+            $location.url('/newgroup');
+        };
+
+        this.AddParticipantRedirect= function(){
+            $location.url('/addparticipant');
+        };
+
+        
         this.loadMessages();
 }]);
