@@ -1,6 +1,11 @@
 <div class="row">
     
-    <p align="right"><a class="waves-effect  black lighten-1 btn-small" ng-click="gchatCtrl.loginRedirect()">Logout </a></p> 
+    <p align="left"><a class="waves-effect  black lighten-1 btn-small" ng-click="gchatCtrl.reload()">Reload </a></p> 
+</div> 
+
+<div class="row">
+    
+    <p align="left"><a class="waves-effect  black lighten-1 btn-small" ng-click="gchatCtrl.loginRedirect()">Logout </a></p> 
 </div> 
 
 <div ng-cloak style="align-content: center">
@@ -14,9 +19,8 @@
                      <textarea style="background: white" id="textarea1" class="materialize-textarea" ng-model="gchatCtrl.newText"></textarea>
                 </div>
                 <div class="card-action white">
-                     
-                                    
-                    <button class="btn waves-effect waves-light " type="submit" name="action" ng-click="gchatCtrl.postMsg()">Enviar
+                    
+                    <button class="btn waves-effect waves-light " type="submit" name="action" ng-click="gchatCtrl.postMessage()">Post
                     <i class="material-icons right">send</i>
                     </button>
                 </div>
@@ -38,7 +42,13 @@
                             <div ></div><span class="card-title">{{m.uName}}</span>
                             <!-- Here comes the message text -->
                             <p>
-                                {{m.mInfo}}
+                                {{m.cusername}}
+                            </p>
+                            <p>
+                                {{m.minfo}}
+                            </p>
+                            <p>
+                                {{m.mdate}}
                             </p>
                             <span class="md-subhead" >{{m.mDate}}</span></div>
                             <div class="card-action">

@@ -1,6 +1,7 @@
 from configs.dbconfig import pg_config
 import psycopg2
 
+
 class groupDAO:
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
@@ -17,7 +18,6 @@ class groupDAO:
             result.append(row)
         return result
 
-
     def getGroupsById(self, gid):
         cursor = self.conn.cursor()
         query = "select * from Groups where gid = %s;"
@@ -27,7 +27,7 @@ class groupDAO:
             result.append(row)
         return result
 
-#Select Users.ufirst_name, Users.ulast_name from Users, Participates where Users.uid = Participates.uid and Participates.gid = 2
+    # Select Users.ufirst_name, Users.ulast_name from Users, Participates where Users.uid = Participates.uid and Participates.gid = 2
     def getGroupsByName(self, groupname):
         cursor = self.conn.cursor()
         query = "Select * from Groups where gname = %s;"
@@ -55,7 +55,6 @@ class groupDAO:
             result.append(row)
         return result
 
-
     def getByUserId(self, uid):
         cursor = self.conn.cursor()
         query = "Select * from Groups where uid = %s;"
@@ -65,14 +64,20 @@ class groupDAO:
             result.append(row)
         return result
 
-    def getMessagesByGroupId(self, uid):
+    def getMessagesByGroupId(self, gid):
         cursor = self.conn.cursor()
-        query = "Select gname, minfo, Messages.uid From (Messages INNER JOIN isPart " \
-                "ON Messages.mid = isPart.mid) INNER JOIN Groups ON Groups.gid = isPart.gid" \
-                " Where Groups.gid= %s;"
-        cursor.execute(query, (uid,))
+        query = "Select G.gid, M.mid, minfo, mdate, U.uid, cusername " \
+                "from (Messages as M inner join isPart ON M.mid=isPart.mid) " \
+                "inner join Groups as G ON G.gid = isPart.gid inner join users as U " \
+                "ON M.uid = U.uid inner join credentials as C " \
+                "ON C.cid = U.cid " \
+                "Where G.gid = 1 " \
+                "order by mdate desc;"
+        cursor.execute(query, (gid,))
         result = []
+        ##query = "Select gname, minfo, Messages.uid From (Messages INNER JOIN isPart " \
+        #        "ON Messages.mid = isPart.mid) INNER JOIN Groups ON Groups.gid = isPart.gid" \
+        #        " Where Groups.gid= %s;"
         for row in cursor:
             result.append(row)
         return result
-

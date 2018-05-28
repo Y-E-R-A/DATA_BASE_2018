@@ -15,9 +15,15 @@ class GroupHandler:
 
     def mapGroupMessagesToDict(self, row):
         result = {}
-        result['gname'] = row[0]
-        result['minfo'] = row[1]
-        result['uid'] = row[2]
+        #result['gname'] = row[0]
+        #result['minfo'] = row[1]
+        #result['uid'] = row[2]
+        result['gid'] = row[0]
+        result['mid'] = row[1]
+        result['minfo'] = row[2]
+        result['mdate'] = row[3]
+        result['uid'] = row[4]
+        result['cusername'] = row[5]
         return result
 
     def getAllGroups(self):

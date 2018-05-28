@@ -47,3 +47,10 @@ class IsPartDAO:
             result.append(row)
         return result
 
+    def insert(self, mid, gid):
+        cursor = self.conn.cursor()
+        query = "insert into IsPart(mid, gid) values (%s, %s);"
+        cursor.execute(query, (mid, gid,))
+        #mid = cursor.fetchone()[0]
+        self.conn.commit()
+        return

@@ -169,13 +169,17 @@ def getCredentialsByEmai(cemail):                                  #
 # ################
 
 #SEARCHING BY MESSAGE ATTRIBUTE
-@app.route('/MessagingAppP1/messages')
+@app.route('/MessagingAppP1/messages', methods=['GET','POST'])
 def getAllMessages():
-    if request.args:
-        return MessagesHandler.getAllMessages(request.args)
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return MessagesHandler().insertCredentialsJSON(request.json)
     else:
-        handler = MessagesHandler()
-        return handler.getAllMessages()
+        if request.args:
+            return MessagesHandler.getAllMessages(request.args)
+        else:
+            handler = MessagesHandler()
+            return handler.getAllMessages()
 
 @app.route('/MessagingAppP1/messages/<int:mid>')
 def getMessageById(mid):
@@ -363,9 +367,13 @@ def getReceivedMsgByMessageId(mid):
 #    Is Part     #
 # ################
 
-@app.route('/MessagingAppP1/PartOfGroup')
+@app.route('/MessagingAppP1/PartOfGroup', methods=['GET','POST'])
 def getAllIsPart():
-    return IsPartHandler().getAllIsPart()
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return IsPartHandler().insertCredentialsJSON(request.json)
+    else:
+        return IsPartHandler().getAllIsPart()
 #Posible Removal
 @app.route('/MessagingAppP1/PartOfGroup/<int:pid>')
 def getIsPartById(pid):
