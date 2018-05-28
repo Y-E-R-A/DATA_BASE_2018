@@ -10,6 +10,13 @@ class AdminHandler:
         result['gid'] = row[1]
         #result['gid'] = row[2]
         return result
+    def buildPinDict(self, uid, gid):
+        result = {}
+        result['uid'] = uid
+        result['gid'] = gid
+
+
+
 
     def getAllAdmin(self):
         dao = AdminDAO()
@@ -49,3 +56,19 @@ class AdminHandler:
             for r in result:
                 mapped_result.append(self.mapToDict(r))
             return jsonify(Admin=mapped_result)
+
+
+    def insertCredentialsJSON(self, json):
+
+        uid = json.get('uid');
+        gid = json.get('gid');
+        print("AdminHandler");
+        print(gid)
+        print(uid)
+
+        if uid and gid:
+            AdminDAO().insert(uid, gid)
+            mapped_result = self.buildPinDict(uid, gid)
+            return jsonify(AdministratesGroup=mapped_result), 201
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 404

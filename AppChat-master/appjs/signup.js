@@ -36,10 +36,7 @@ angular.module('AppChat').controller('SignUpController', ['$http', '$log', '$sco
             
             var data = {};
         
-            //data.ufirst_name = this.first_name;
-            
-            //data.ulast_name = this.last_name;
-            
+                     
             data.cuser_name = this.user_name;
             
             data.cpassword = this.password;

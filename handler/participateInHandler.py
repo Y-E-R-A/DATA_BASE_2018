@@ -8,8 +8,14 @@ class ParticipationHandler:
         result = {}
         result['uid'] = row[0]
         result['gid'] = row[1]
-
         return result
+
+    def buildPinDict(self, uid, gid):
+        result = {}
+        result['uid'] = uid
+        result['gid'] = gid
+        return result
+
     def mapToParticipantsListDict(self, row):
         result = {}
         result['uid'] = row[0]
@@ -66,3 +72,16 @@ class ParticipationHandler:
             for r in result:
                 mapped_result.append(self.mapToParticipantsListDict(r))
             return jsonify(ParticipateInGroup=mapped_result)
+
+    def insertCredentialsJSON(self, json):
+        gid = json.get('gid')
+        uid = json.get('uid');
+        print(gid)
+        print(uid)
+
+        if uid and gid:
+            PinDAO().insert(uid, gid)
+            mapped_result = self.buildPinDict(uid, gid)
+            return jsonify(ParticipateInGroup=mapped_result), 201
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 404

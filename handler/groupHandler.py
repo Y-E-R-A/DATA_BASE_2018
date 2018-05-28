@@ -12,7 +12,14 @@ class GroupHandler:
         result['gcreation'] = row[3]
         result['uid'] = row[4]
         return result
-
+    def buildGroupDict(self,gid, gname, gdescription, gcreation, adminId ):
+        result = {}
+        result['gid'] = gid
+        result['gname'] = gname
+        result['gdesc'] = gdescription
+        result['gcreation'] = gcreation
+        result['uid'] = adminId
+        return result
     def mapGroupMessagesToDict(self, row):
         result = {}
         #result['gname'] = row[0]
@@ -106,3 +113,23 @@ class GroupHandler:
                 mapped_result.append(self.mapGroupMessagesToDict(r))
             return jsonify(GroupMessages =mapped_result)
 
+
+    def insertCredentialsJSON(self,json):
+
+        gname = json.get('gName')
+        gdescription = json.get('gdescription');
+        gcreation = json.get('gcreation');
+        adminId = json.get('gadminID');
+        print("GroupHandler")
+        print(gname)
+        print(gdescription)
+        print(gcreation)
+        print(adminId)
+
+
+        if gname and gcreation and gdescription and adminId :
+            gid = groupDAO().insert(gname, gdescription, gcreation,adminId)
+            mapped_result = self.buildGroupDict(gid, gname, gdescription, gcreation, adminId)
+            return jsonify(Group=mapped_result), 201
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 404
