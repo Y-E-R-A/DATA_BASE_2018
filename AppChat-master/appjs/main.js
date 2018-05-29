@@ -11,7 +11,7 @@
             templateUrl: 'pages/gchat.html',
             controller: 'GChatController',
             controllerAs : 'gchatCtrl'
-        }).when('/messagerating/:mid', {
+        }).when('/messagerating/:uid/:gid/:mid', {
             templateUrl: 'pages/messagerating.html',
             controller: 'MessageRatingController',
             controllerAs : 'messageRatingCtrl'
@@ -23,6 +23,14 @@
             templateUrl: 'pages/group.html',
             controller: 'GroupController',
             controllerAs : 'groupCtrl'
+        }).when('/reply/:uid/:gid/:minfo', {
+            templateUrl: 'pages/reply.html',
+            controller: 'ReplyController',
+            controllerAs : 'replyCtrl'
+        }).when('/gsearch/:uid/:gid', {
+            templateUrl: 'pages/gsearch.html',
+            controller: 'GSearchController',
+            controllerAs : 'gsearchCtrl'
         }).when('/login', {
             templateUrl: 'pages/login.html',
             controller: 'LoginController',

@@ -1,18 +1,24 @@
-<p align="right"><button class="btn waves-effect waves-light " type="submit" name="action" ng-click="groupCtrl.createGroup()">Create New Group</button> </p> 
+<p align="right"><button class="btn waves-effect waves-light " type="submit" name="action" ng-click="groupCtrl.createGroup()">Create New Group</button> </p>
 
 <a align="right" class="waves-effect  red lighten-1 btn-small" ng-click="groupCtrl.Back()">Back</a>
 
 <div ng-cloak style="align-content: center">
     <div class="row">
+
+        <p align="right"><button class="btn waves-effect waves-light " type="submit" name="action" ng-click="groupCtrl.createGroup()">Create New Group
+                    </button> </p>
+
+
         <div class="col s12 m6">
-            <div class="card teal darken-1"> 
+            <div class="card teal darken-1">
                 <div class="card-content ">
+                   
                     <i class="material-icons prefix" style="color: white">mode_edit</i> <span text-white style="font-size:larger; color:white">Group:</span>
-                    
+
                      <textarea style="background: white" id="textarea1" class="materialize-textarea" ng-model="chatCtrl.newText"></textarea>
-                    
-                     
-                </div> 
+
+
+                </div>
             </div>
         </div>
 
@@ -35,11 +41,7 @@
                             </p>
                             </div>
                             <div class="card-action">
-                            
-                            
                             <td><a class="waves-effect  blue lighten-1 btn-small" ng-click="groupCtrl.loadMessages(g.gid)">Enter</a></td>
-                             
-                            
                         </div>
                     </div>
                 </div>

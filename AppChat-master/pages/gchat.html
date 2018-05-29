@@ -3,7 +3,7 @@
     <p align="right"><a class="waves-effect  black lighten-1 btn-small" ng-click="gchatCtrl.loginRedirect()">Logout </a></p>
     </div>
 <div class="row">
-    
+
     <p align="right"><a class="waves-effect  black lighten-1 btn-small" ng-click="gchatCtrl.Back()">Back </a></p>
 </div>
 <div class="row">
@@ -11,6 +11,15 @@
 </div>
 <div class="row">
     <p align="left"><a class="waves-effect  black lighten-1 btn-small" ng-click="gchatCtrl.reload()">Reload </a></p>
+    <p align="left"><a class="waves-effect  blue lighten-1 btn-small" ng-click="gchatCtrl.reload()">Reload </a></p>
+</div>
+
+<div class="row">
+    <p align="left"><a class="waves-effect  green lighten-1 btn-small" ng-click="gchatCtrl.search()">Search </a></p>
+</div>
+
+<div>
+<p align="left"><a class="waves-effect  black lighten-1 btn-small" ng-click="gchatCtrl.loginRedirect()">Logout </a></p>
 </div>
 
 <div ng-cloak style="align-content: center">
@@ -55,7 +64,7 @@
                             <p>
                                 {{m.mdate}}
                             </p>
-                            <span class="md-subhead" >{{m.mDate}}</span></div>
+                           </div>
                             <div class="card-action">
                             
                             <a class="btn-floating btn-small waves-effect waves-light blue"  ng-click="gchatCtrl.likeMessage(m.mid)" ng-init="countLike=(m.like||0)"><i class="material-icons"><md-button>thumb_up</md-button>
@@ -65,7 +74,9 @@
                             </i></a>{{m.dislikes}}
 
                             <td><a class="waves-effect  green lighten-1 btn-small" ng-click="gchatCtrl.messageRating(m.mid)">Reaction</a></td>
-                             
+
+                            <td><a class="waves-effect  gray lighten-1 btn-small" ng-click="gchatCtrl.reply(m.minfo)">Reply</a></td>
+
                         </div>
                     </div>
                 </div>

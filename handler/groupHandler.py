@@ -101,10 +101,10 @@ class GroupHandler:
                 mapped_result.append(self.mapToDict(r))
             return jsonify(Group =mapped_result)
 
-    def getMessagesByGroupId(self, uid):
+    def getMessagesByGroupId(self, gid):
 
         dao = groupDAO()
-        result = dao.getMessagesByGroupId(uid)
+        result = dao.getMessagesByGroupId(gid)
         mapped_result = []
         if not result:
             return jsonify(Error="NOT FOUND"), 404

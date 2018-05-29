@@ -187,6 +187,7 @@ def getAllMessages():
             handler = MessagesHandler()
             return handler.getAllMessages()
 
+
 @app.route('/MessagingAppP1/messages/<int:mid>')
 def getMessageById(mid):
     return MessagesHandler().getMessageById(mid)
@@ -254,6 +255,8 @@ def getReplayByReplyToId(rid): #Search by reply message id
 def getConversation(uid1,uid2):
     return MessagesHandler().getConversation(uid1,uid2)
 
+
+
 ################
 #     GROUPS   #
 ################
@@ -304,6 +307,11 @@ def getAdminByGroupId(gid):
 @app.route('/MessagingAppP1/group/<int:gid>/messages')
 def getMessagesByGroupId(gid):
     return GroupHandler().getMessagesByGroupId(gid)
+
+#GROUP MESSAGE WITH HASHTAG
+@app.route('/MessagingAppP1/message/hashtag/<int:gid>')
+def getHashTagMessages(gid):
+    return MessagesHandler().getHashtagMessages(gid)
 
 ######################
 #     Reaction       #

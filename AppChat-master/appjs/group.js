@@ -71,8 +71,8 @@ angular.module('AppChat').controller('GroupController', ['$http', '$log', '$scop
         this.Back= function(){
           $location.url('/chatmenu/'+$routeParams.uid);
         }
-        
-        
+
+
         this.createGroup= function(){
            $location.url('/newgroup/'+$routeParams.uid);
         }

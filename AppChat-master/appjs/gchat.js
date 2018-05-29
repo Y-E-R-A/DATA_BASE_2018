@@ -313,8 +313,9 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
                 }
             );
         };
+
         this.messageRating = function (mid) {
-            $location.url('/messagerating/' + mid);
+            $location.url('/messagerating/'+ $routeParams.uid+'/'+$routeParams.gid+'/'+ mid);
         };
         
         this.loginRedirect= function(){
@@ -330,13 +331,28 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
             location.reload();
         }
 
+        this.search = function(){
+            $location.url('/gsearch/' + $routeParams.uid + '/' + $routeParams.gid);
+        }
+
+        this.reply = function(minfo){
+            console.log("message info: "+minfo);
+            console.log("User Id: "+$routeParams.uid);
+            console.log("Group Id: "+$routeParams.gid);
+            console.log('/reply/'+$routeParams.uid+'/'+$routeParams.gid+'/'+minfo);
+            $location.url('/reply/' + $routeParams.uid + '/' + $routeParams.gid + '/' + minfo);
+        }
+        this.createGroupRedirect= function(){
+            $location.url('/newgroup');
+        };
+
         this.AddParticipantRedirect= function(){            $location.url('/addparticipant/'+$routeParams.uid+"/"+$routeParams.gid);
         };
-        
+
         this.Back= function(){
           $location.url('/group/'+$routeParams.uid);
         }
-            
-        
+
+
         this.loadMessages();
 }]);

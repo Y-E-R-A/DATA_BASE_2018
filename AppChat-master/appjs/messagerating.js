@@ -57,6 +57,8 @@ angular.module('AppChat').controller('MessageRatingController', ['$http', '$log'
                 }
             );
         };
-
+        this.return = function(){
+            $location.url('/gchat/'+$routeParams.uid+'/'+$routeParams.gid);
+        }
         this.loadRatings();
 }]);

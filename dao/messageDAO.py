@@ -69,6 +69,33 @@ class messageDAO:
             result.append(row)
         return result
 
+    def getHashtagMessages(self, gid):
+        cursor = self.conn.cursor()
+        query = "with    messages_in_group as (Select G.gid, gname, M.mid, minfo, mdate, U.uid, cusername " \
+                "From (Messages as M INNER JOIN isPart " \
+                "ON M.mid = isPart.mid) INNER JOIN Groups as G " \
+                "ON G.gid = isPart.gid INNER JOIN users as U " \
+                "ON M.uid = U.uid INNER JOIN credentials as C " \
+                "ON C.cid = U.cid " \
+                "Where G.gid= %s), " \
+                "messages_likes as (select m.mid,count(*) as likes " \
+                "from messages as m, reaction as r " \
+                "where r.rating='like' and m.mid=r.mid " \
+                "group by m.mid), " \
+                "messages_dislikes as (select m.mid,count(*) as dislikes " \
+                "from messages as m, reaction as r " \
+                "where r.rating='dislike' and m.mid=r.mid " \
+                "group by m.mid) " \
+                "select gid, gname, M.mid, minfo, mdate, uid, cusername, L.likes, D.dislikes " \
+                "from messages_in_group as M left join messages_likes as L on M.mid = L.mid " \
+                "left join messages_dislikes as D on M.mid = D.mid " \
+                "where minfo like '#%';"
+        cursor.execute(query, (gid, ))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
 
 
     def insert(self, mdate, minfo, uid):

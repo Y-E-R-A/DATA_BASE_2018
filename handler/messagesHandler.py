@@ -12,6 +12,19 @@ class MessagesHandler:
         result['uid']= row[3]
         return result
 
+    def mapToHashTagMsgDict(self, row):
+        result = {}
+        result['gid'] = row[0]
+        result['gname'] = row[1]
+        result['mid'] = row[2]
+        result['minfo']= row[3]
+        result['mdate'] = row[4]
+        result['uid'] = row[5]
+        result['cusername'] = row[6]
+        result['likes'] = row[7]
+        result['dislikes'] = row[8]
+        return result
+
     def build_messages_attributes(self, mid, mdate, minfo, uid):
         result = {}
         result['mid'] = mid
@@ -135,6 +148,16 @@ class MessagesHandler:
 
     def getConversation(self,uid1, uid2):
         result = messageDAO().getConversation(uid1,uid2)
+        mapped_result = []
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            for r in result:
+                mapped_result.append(self.mapToMsgDict(r))
+            return jsonify(Messages=mapped_result)
+
+    def getHashtagMessages(self,gid):
+        result = messageDAO().getHashtagMessages(gid)
         mapped_result = []
         if not result:
             return jsonify(Error="NOT FOUND"), 404
