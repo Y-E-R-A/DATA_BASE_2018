@@ -1,3 +1,4 @@
+
 <div ng-cloak style="align-content: center">
     <div class="row">
         <div class="col s12 m6">
@@ -6,13 +7,17 @@
                     <span class="card-title"><font face = "verdana" size = "5">Login</font></span>
                     <table>
                         <tbody>
-                            <tr>
-                                <th>User: </th>
-                                <th><input ng-model="loginCtrl.user" ng-placeholder="{{userPH}}"></th>
+                            <tr>                                     
+                               
+                            <th> 
+                                <label> <b>Username </b></label>
+                                <input ng-model="loginCtrl.user" placeholder="Enter Username"></th>
                             </tr>
                             <tr>
-                                <th>Password: </th>
-                                <th><input ng-model="loginCtrl.password"></th>
+                                                          
+                            <th>
+                                <label> <b>Password </b></label>
+                                <input ng-model="loginCtrl.password" placeholder="Enter Password"></th>
                             </tr>
                         </tbody>
                     </table>
@@ -26,4 +31,5 @@
             </div>
         </div>
     </div>
+
 </div>

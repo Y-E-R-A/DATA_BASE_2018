@@ -16,7 +16,12 @@ angular.module('AppChat').controller('NewGroupController', ['$http', '$log', '$s
         var groupList = {};
         var participantList= {}
         var administratesList={}
-                
+        
+        
+        this.Back= function(){
+          $location.url('/group/'+$routeParams.uid);
+        }
+        
         this.createNewGroup = function(){
             // Get the target part id from the parameter in the url
             // using the $routerParams object
@@ -215,19 +220,11 @@ angular.module('AppChat').controller('NewGroupController', ['$http', '$log', '$s
                 
                 
             );
-        };
-        
-        
-        
-        
-        
-        
+        };      
       
         
 }
-           
-                                                           
-            
+                    
                                                            
                                                            
 ]);

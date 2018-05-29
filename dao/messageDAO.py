@@ -71,9 +71,6 @@ class messageDAO:
 
 
 
-
-
-
     def insert(self, mdate, minfo, uid):
         cursor = self.conn.cursor()
         query = "insert into messages(mdate, minfo, uid) values (now(), %s, %s) returning mid;"

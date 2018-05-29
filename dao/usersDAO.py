@@ -85,6 +85,14 @@ class UserDAO:
             result.append(row)
         return result
 
+    def getUserIDByPhone(self, phone):
+        cursor = self.conn.cursor()
+        query = "SELECT uid from Users Where Users.phone = %s;"
+        cursor.execute(query, (phone,))
+        result = cursor
+        return result
+
+
     def getUserMessages(self):
         cursor = self.conn.cursor()
         query = "select D.uid,D.mid,D.ufirst_name,D.ulast_name,D.minfo,D.mdate, D.likes, C.dislikes " \

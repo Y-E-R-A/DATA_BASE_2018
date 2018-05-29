@@ -50,7 +50,7 @@ angular.module('AppChat').controller('LoginController', ['$http', '$log', '$scop
                     //this.group(response.data.User.uid);
                     console.log("uid: " + JSON.stringify(response.data.User[0].uid))
                     
-                    $location.url('/group/' + response.data.User[0].uid);
+                   $location.url('/chatmenu/'+response.data.User[0].uid);
                     
                 }, //Error function
                 function (response) {

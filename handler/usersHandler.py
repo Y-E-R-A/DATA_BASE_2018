@@ -24,6 +24,12 @@ class UsersHandler:
         result['gdate'] = row[4]
         return result
 
+    def mapPhoneToUID(self, row):
+        result={}
+        result['uid'] = row[0]
+        return result
+
+
     def mapToUserInfoDict(self, row):
         result = {}
         result['cid'] = row[0]
@@ -160,6 +166,18 @@ class UsersHandler:
 
             return jsonify(User=mapped_result)
 
+    def getUserIDByPhone(self, phone):
+
+        result = UserDAO().getUserIDByPhone(phone)
+        mapped_result = []
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        else:
+            for r in result:
+                mapped_result.append(self.mapPhoneToUID(r))
+
+            return jsonify(User=mapped_result)
+
     def insertCredentialsJSON(self,json):
         cid = json.get('cid')
 
@@ -177,4 +195,3 @@ class UsersHandler:
             return jsonify(User = mapped_result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 404
-

@@ -6,7 +6,7 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
         this.messageList = [];
         this.counter  = 2;
         this.newText = "";
-        
+        this.newMessageList = [];
         var id = 0;
         //var uid = $routeParams.uid;
         //var gid = $routeParams.gid;
@@ -330,8 +330,13 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
             location.reload();
         }
 
-        this.createAddParticipantRedirect= function(){
-            $location.url('/addparticipant');
+        this.AddParticipantRedirect= function(){            $location.url('/addparticipant/'+$routeParams.uid+"/"+$routeParams.gid);
         };
+        
+        this.Back= function(){
+          $location.url('/group/'+$routeParams.uid);
+        }
+            
+        
         this.loadMessages();
 }]);

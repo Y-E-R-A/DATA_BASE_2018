@@ -115,6 +115,12 @@ def getReceivedMsgByUserId(uid):
 def getUserGroups(uid):
    return UsersHandler().getUserGroupsByUserId(uid)
 
+#USER ID BY PHONE
+@app.route('/MessagingAppP1/uid/<string:phone>')
+def getUIDByPhone(phone):
+   return UsersHandler().getUserIDByPhone(phone)
+
+
 #USER PERSONAL INFORMATION
 @app.route('/MessagingAppP1/user/<int:uid>/info')
 def getUserInfo(uid):
