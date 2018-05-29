@@ -316,7 +316,7 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
         };
         
         this.messageRating = function (mid) {
-            $location.url('/messagerating/' + mid);
+            $location.url('/messagerating/'+ $routeParams.uid+'/'+$routeParams.gid+'/'+ mid);
         };
         
         this.loginRedirect= function(){

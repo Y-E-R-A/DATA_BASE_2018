@@ -11,7 +11,7 @@
             templateUrl: 'pages/gchat.html',
             controller: 'GChatController',
             controllerAs : 'gchatCtrl'
-        }).when('/messagerating/:mid', {
+        }).when('/messagerating/:uid/:gid/:mid', {
             templateUrl: 'pages/messagerating.html',
             controller: 'MessageRatingController',
             controllerAs : 'messageRatingCtrl'

@@ -6,8 +6,9 @@ angular.module('AppChat').controller('GSearchController', ['$http', '$log', '$sc
         this.messageList = [];
         this.counter  = 2;
         this.newMessageList = [];
-        
-         this.searchMessage = function(){
+        this.hashList = [];
+        var i = 0;
+        this.searchMessage = function(){
            
             var info = thisCtrl.newText;
             
@@ -16,25 +17,36 @@ angular.module('AppChat').controller('GSearchController', ['$http', '$log', '$sc
 
             
             //data.udescription = this.description;
-            
-            var reqURL = "http://localhost:5000/MessagingAppP1/message/hashtag/"+$routeParams.gid;
+            var reqURL = "http://localhost:5000/MessagingAppP1/group/"+$routeParams.gid+"/messages";
+             
             console.log("reqURL: " + reqURL);
         
             // Now issue the http request to the rest API
             $http.get(reqURL).then(
                 // Success function
                 function (response) {
+                    console.log("Messages");
                     console.log("response: " + JSON.stringify(response.data))
                     // assing the part details to the variable in the controller
                     
-                    thisCtrl.id = response.data.User.mid
 
-                    thisCtrl.newMessagelList = response.data.User;
+                    thisCtrl.newMessagelList = response.data.GroupMessages;
                     
-                    console.log("thisNewMessageList: " +JSON.stringify(thisCtrl.newMessageList))
+                    console.log("thisNewMessageList: " +JSON.stringify(thisCtrl.newMessageList));
                     
-                    console.log("second sign in")
-                    thisCtrl.messageIsPart();
+                    console.log("response New Messa: " + JSON.stringify(response.data.GroupMessages))
+                    
+                    console.log("length: "+JSON.stringify(response.data.GroupMessages.length));
+                    var i;
+                    for(i =0; i<response.data.GroupMessages.length;i++){
+                       console.log("string: "+ response.data.GroupMessages[i].minfo)
+                        if(response.data.GroupMessages[i].minfo.includes("#")){
+                           console.log("Contains #"); thisCtrl.hashList.push(response.data.GroupMessages[i]);
+                        }
+                    }
+                    console.log("second sign in");
+                    console.log("hashList: "+ JSON.stringify(thisCtrl.hashList));
+                    //thisCtrl.messageIsPart (;
                    
                     
                 }, //Error function

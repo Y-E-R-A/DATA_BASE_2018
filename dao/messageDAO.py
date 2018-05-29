@@ -89,7 +89,7 @@ class messageDAO:
                 "select gid, gname, M.mid, minfo, mdate, uid, cusername, L.likes, D.dislikes " \
                 "from messages_in_group as M left join messages_likes as L on M.mid = L.mid " \
                 "left join messages_dislikes as D on M.mid = D.mid " \
-                "where minfo like '%#%';"
+                "where minfo like '#%';"
         cursor.execute(query, (gid, ))
         result = []
         for row in cursor:

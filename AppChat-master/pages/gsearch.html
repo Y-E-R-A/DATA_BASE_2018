@@ -1,5 +1,5 @@
 <div ng-cloak style="align-content: center">
-    <div ng-repeat="m in gsearchCtrl.newMessageList">
+    <div ng-repeat="m in gsearchCtrl.hashList">
         <div class="row">
             <div class="col s12 m6">
                 <div class="card">
@@ -9,17 +9,26 @@
                             <tbody>
                                 <tr>
                                     <th>User Name: </th>
-                                    <th>{{m.firstname}} {{m.lastname}}</th>
+                                    <th>{{m.cusername}}</th>
                                 </tr>
                                 <tr>
-                                    <th>Rating: </th>
-                                    <th>{{m.rating}}</th>
+                                    <th>Message: </th>
+                                    <th>{{m.minfo}}</th>
+                                </tr>
+                                <tr>
+                                    <th>Likes: </th>
+                                    <th>{{m.likes}}</th>
+                                </tr>
+                                <tr>
+                                    <th>Dislikes: </th>
+                                    <th>{{m.dislikes}}</th>
+                                </tr>
+                                <tr>
+                                    <th>Date: </th>
+                                    <th>{{m.mdate}}</th>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="card-action">
-                        <a href="#/gchat">Exit</a>
                     </div>
                 </div>
             </div>
@@ -30,7 +39,7 @@
                 <div class="card">
                     <div class="card-content"></div>
                     <div class="card-action">
-                        <a href="#/gchat">Exit</a>
+                        <a class="waves-effect  red lighten-1 btn-small" ng-click="gsearchCtrl.return()">Return</a>
                     </div>
                 </div>
             </div>
