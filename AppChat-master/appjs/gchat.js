@@ -329,7 +329,7 @@ angular.module('AppChat').controller('GChatController', ['$http', '$log', '$scop
         }
         
         this.search = function(){
-            $location.url('/gsearch/'+$routeParams.gid);
+            $location.url('/gsearch/' + $routeParams.uid + '/' + $routeParams.gid);
         }
             
         this.reply = function(minfo){

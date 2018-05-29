@@ -27,6 +27,10 @@
             templateUrl: 'pages/reply.html',
             controller: 'ReplyController',
             controllerAs : 'replyCtrl'
+        }).when('/gsearch/:uid/:gid', {
+            templateUrl: 'pages/gsearch.html',
+            controller: 'GSearchController',
+            controllerAs : 'gsearchCtrl'
         }).when('/login', {
             templateUrl: 'pages/login.html',
             controller: 'LoginController',
